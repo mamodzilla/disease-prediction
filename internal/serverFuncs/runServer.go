@@ -1,16 +1,16 @@
 package serverfuncs
 
 import (
-	"back-end/configs"
+	"back-end/pkg/structs"
 	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
 )
 
-func Run(cfg *configs.Config, r *mux.Router) {
+func Run(cfg *structs.Config, r *mux.Router) {
 	s := &http.Server{
-		Addr:    cfg.Host + ":" + cfg.Port,
+		Addr:    cfg.Server.Host + ":" + cfg.Server.Port,
 		Handler: r,
 	}
 

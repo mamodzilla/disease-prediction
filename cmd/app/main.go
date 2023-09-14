@@ -10,13 +10,14 @@ import (
 )
 
 func main() {
-	path := "../../configs/config.yml"
-	cfg, err := configs.NewConfig(path)
+	cfg := configs.NewConfig()
+
+	db, err := serverfuncs.NewConnToDb(cfg)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Error: failed to connect to the database")
 	}
 
-	server := serverhandlers.NewServer()
+	server := serverhandlers.NewServer(db)
 	accountHandler := server.NewAccountHandler()
 
 	r := mux.NewRouter()
