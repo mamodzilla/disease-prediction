@@ -1,0 +1,41 @@
+.result__diagnose-listing {
+    margin-bottom: 65px;
+}
+  
+.result__diagnose-container {
+    padding: 43px 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.2509803922);
+    display: flex;
+    align-items: center;
+}
+  
+.result__disease-name {
+    font-size: 28px;
+    font-weight: 700;
+    width: 685px;
+}
+  
+.result__delimiter {
+    width: 5px;
+    height: 64px;
+    background-color: #BAB9B9;
+    margin-right: 20px;
+}
+  
+.result__disease-probability-container {
+    margin-right: 190px;
+}
+  
+.result__disease-probability {
+    color: #EE0101;
+    font-size: 28px;
+    font-weight: 700;
+}
+  
+.result__disease-arrow-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  

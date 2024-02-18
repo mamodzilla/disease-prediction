@@ -1,0 +1,33 @@
+.by-symptoms__question-header {
+    display: flex;
+    margin-bottom: 50px;
+}
+  
+.by-symptoms__question-number {
+    font-size: 28px;
+    font-weight: 700;
+    color: #00AF11;
+    margin-right: 20px;
+}
+  
+.by-symptoms__question-text {
+    font-size: 28px;
+    font-weight: 700;
+}
+  
+.by-symptoms__answer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+  
+.by-symptoms__input {
+    width: 325px;
+    height: 60px;
+    border-radius: 10px;
+    font-size: 28px;
+    font-weight: 500;
+    border: solid 3px #000;
+    margin-right: 16px;
+}

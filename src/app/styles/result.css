@@ -1,0 +1,37 @@
+.result__h-container {
+    background: linear-gradient(90deg, #57C964 30.19%, #577CEF 100%);
+    border-radius: 20px 20px 0 0;
+    margin-top: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 115px;
+}
+  
+.result__h {
+    color: #FFF;
+}
+  
+.result__container {
+    border-radius: 0 0 20px 20px;
+    margin-bottom: 70px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2509803922);
+    padding: 100px 82px 55px 82px;
+}
+  
+.result__header {
+    margin-bottom: 16px;
+    display: flex;
+}
+  
+.result__header-diagnoses {
+    font-size: 46px;
+    color: #00AF11;
+    font-weight: 700;
+    margin-right: 458px;
+}
+  
+.result__header-probability {
+    font-size: 46px;
+    font-weight: 700;
+}

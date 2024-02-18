@@ -1,0 +1,56 @@
+.personal-info__container {
+    margin-bottom: 70px;
+    padding: 80px 68px 40px 82px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2509803922);
+    border-radius: 0 0 20px 20px;
+}
+  
+.personal-info__nickname {
+    margin-bottom: 40px;
+}
+  
+.personal-info__item-listing {
+    margin-bottom: 26px;
+}
+  
+.personal-info__item-string {
+    display: flex;
+    margin-bottom: 48px;
+}
+.personal-info__item-string:last-child {
+    margin-bottom: 0;
+}
+  
+.personal-info__item {
+    margin-right: 16px;
+}
+  
+.personal-info__item-text {
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 18px;
+}
+  
+.personal-info__item-text--active {
+    color: #00AF11;
+}
+  
+.personal-info__item-input-container {
+    display: flex;
+    align-items: center;
+}
+  
+.personal-info__item-input {
+    margin-right: 16px;
+    border: solid 3px #ECECEC;
+    width: 306px;
+    height: 60px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 500;
+}
+  
+.personal-info__save-btn-container {
+    display: flex;
+    justify-content: right;
+}

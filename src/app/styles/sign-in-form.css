@@ -1,0 +1,36 @@
+.sign-in__input-listing {
+    margin-bottom: 28px;
+}
+  
+.sign-in__item {
+    margin-bottom: 20px;
+}
+.sign-in__item:last-child {
+    margin-bottom: 0px;
+}
+  
+.sign-in__item-text {
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+  
+.sign-in__item-input-container {
+    display: flex;
+    align-items: center;
+}
+  
+.sign-in__item-input {
+    width: 426px;
+    height: 60px;
+    font-size: 28px;
+    border-radius: 10px;
+    border: solid 3px #000;
+    margin-left: 34px;
+    margin-right: 16px;
+}
+  
+.sign-in__btn-container {
+    display: flex;
+    justify-content: center;
+}

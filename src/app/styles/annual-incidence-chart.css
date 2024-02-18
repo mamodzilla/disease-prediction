@@ -1,0 +1,19 @@
+.statistics__annual-incidence-chart-container {
+    height: 234px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.statistics__annual-incidence-chart {
+    display: flex;
+    justify-content: center;
+    margin: 0 30px;
+    width: 834px;
+    height: inherit;
+}
+  
+.statistics__annual-incidence-chart-head {
+    font-size: 28px;
+    font-weight: 700;
+}

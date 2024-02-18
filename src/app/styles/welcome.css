@@ -1,0 +1,22 @@
+.header__welcome-container {
+    padding-top: 273px;
+    padding-bottom: 348px;
+}
+  
+.header__welcome-h {
+    text-align: center;
+    margin-bottom: 35px;
+}
+  
+.header__additional-information {
+    font-size: 28px;
+    color: #848282;
+    margin: 0 0 65px 0;
+    text-align: center;
+}
+  
+.header__start-diagnosing-container {
+    display: flex;
+    justify-content: center;
+}
+  

@@ -1,0 +1,6 @@
+.result__disease-arrow {
+    transform: rotate(180deg);
+    width: 26px;
+    height: 26px;
+    fill: #000;
+}

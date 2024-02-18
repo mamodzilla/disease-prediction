@@ -1,0 +1,11 @@
+.result__form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.result__btn {
+    width: 304px;
+    height: 82px;
+    font-size: 28px;
+}

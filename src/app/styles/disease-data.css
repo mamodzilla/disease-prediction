@@ -1,0 +1,74 @@
+.disease-history__disease-data {
+    border: solid 6px #00AF11;
+    padding: 16px 25px;
+    overflow: auto;
+    border-radius: 0 0 20px 0;
+    width: 589px;
+    max-height: 1024px;
+}
+  
+.disease-history__disease-data-h {
+    margin-bottom: 71px;
+    color: #00AF11;
+}
+  
+.disease-history__disease-description-h {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+  
+.disease-history__disease-description-container {
+    padding: 15px 25px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2509803922);
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+  
+.disease-history__disease-description-text {
+    font-size: 28px;
+    font-weight: 500;
+}
+  
+.disease-history__symptom-item {
+    border-radius: 10px;
+    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.2509803922);
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+}
+  
+.disease-history__symptom-text {
+    font-size: 28px;
+    font-weight: 500;
+    width: 367px;
+}
+  
+.disease-history__delimiter {
+    width: 5px;
+    height: 64px;
+    background-color: #BAB9B9;
+    margin-right: 43px;
+}
+  
+.disease-history__symptom-value {
+    font-size: 28px;
+    font-weight: 500;
+}
+  
+.disease-history__symptom-arrow-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.disease-history__symptom-arrow {
+    width: 26px;
+    height: 26px;
+    transform: rotate(180deg);
+    visibility: hidden;
+}
+  
+.disease-history__symptom-arrow--is-overflowing {
+    visibility: visible;
+}

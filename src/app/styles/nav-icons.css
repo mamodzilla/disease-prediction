@@ -1,0 +1,14 @@
+.header__nav-icons {
+    display: flex;
+    gap: 38px;
+}
+  
+.header__theme-icon {
+    width: 32px;
+    height: 32px;
+}
+  
+.header__profile-icon {
+    width: 32px;
+    height: 32px;
+}
