@@ -25,5 +25,10 @@ func (a *AccountHandler) Register(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 400)
 		return
 	}
-
+	err = a.Server.Db.CreateUser(data)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	w.WriteHeader(201)
 }

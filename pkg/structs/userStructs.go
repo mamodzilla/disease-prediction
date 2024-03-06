@@ -1,22 +1,16 @@
 package structs
 
 type UserProfile struct {
-	FirstName      string
-	LastName       string
-	Email          string
-	Gender         string
-	Age            int
-	Job            string
-	MaritalStatus  bool
-	HavingChildren bool
-	Password       string
+	Nickname string
+	Email    string
+	Password string
 }
 
-type AdditionalInformation struct {
+type UserInformation struct {
 	Gender         string
-	Age            int
+	BirthDate      int
 	Job            string
-	MaritalStatus  bool
+	MaritalStatus  string
 	HavingChildren bool
 }
 

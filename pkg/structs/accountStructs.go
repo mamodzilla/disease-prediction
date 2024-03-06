@@ -1,10 +1,9 @@
 package structs
 
 type UserRegister struct {
-	FirstName string
-	LastName  string
-	Email     string
-	Password  string
+	Nickname string
+	Email    string
+	Password string
 }
 
 type UserLogin struct {
