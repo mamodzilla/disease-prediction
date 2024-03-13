@@ -6,6 +6,15 @@ CREATE TABLE IF NOT EXISTS users (
     is_admin BOOLEAN DEFAULT FALSE
 );
 
+CREATE TABLE IF NOT EXISTS tokens (
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    refresh_token VARCHAR,
+    expiration_time BIGINT, 
+
+    FOREIGN KEY(user_id) REFERENCES users(id)
+);
+
 CREATE TABLE IF NOT EXISTS user_information (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL, 

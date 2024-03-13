@@ -6,8 +6,9 @@ type Config struct {
 }
 
 type Server struct {
-	Host string
-	Port string
+	Host       string
+	Port       string
+	SigningKey string
 }
 
 type Db struct {

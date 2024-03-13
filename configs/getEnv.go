@@ -22,6 +22,7 @@ func NewConfig() *structs.Config {
 
 	cfg.Server.Host = os.Getenv("SERVER_HOST")
 	cfg.Server.Port = os.Getenv("SERVER_PORT")
+	cfg.Server.SigningKey = os.Getenv("SIGNING_KEY")
 
 	cfg.Db.Host = os.Getenv("DB_HOST")
 	cfg.Db.Port = os.Getenv("DB_PORT")

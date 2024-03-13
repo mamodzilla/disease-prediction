@@ -17,7 +17,7 @@ func main() {
 		log.Fatal("Error: failed to connect to the database")
 	}
 
-	server := serverhandlers.NewServer(db)
+	server := serverhandlers.NewServer(db, cfg)
 	accountHandler := server.NewAccountHandler()
 
 	r := mux.NewRouter()
@@ -25,6 +25,7 @@ func main() {
 	account := r.PathPrefix("/account").Subrouter()
 	{
 		account.HandleFunc("/register", accountHandler.Register).Methods("POST")
+		account.HandleFunc("/login", accountHandler.Login).Methods("POST")
 	}
 
 	serverfuncs.Run(cfg, r)

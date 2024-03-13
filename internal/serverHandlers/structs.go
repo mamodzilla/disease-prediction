@@ -1,9 +1,13 @@
 package serverhandlers
 
-import dbutils "back-end/pkg/db/dbUtils"
+import (
+	dbutils "back-end/pkg/db/dbUtils"
+	"back-end/pkg/structs"
+)
 
 type Server struct {
-	Db *dbutils.DiseasePredictionDb
+	AppDb *dbutils.DiseasePredictionDb
+	Cfg   *structs.Config
 }
 
 type AccountHandler struct {
