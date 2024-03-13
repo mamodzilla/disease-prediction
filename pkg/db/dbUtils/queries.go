@@ -4,7 +4,7 @@ var createUserQuery = `
 	INSERT INTO users (nickname, email, password) VALUES ($1, $2, $3)	
 `
 var LoginUserQuery = `
-	SELECT user_id, is_admin, password FROM users WHERE email = $1
+	SELECT user_id, nickname, password FROM users WHERE email = $1
 `
 
 var addRefreshTokenQuery = `
@@ -13,4 +13,11 @@ var addRefreshTokenQuery = `
 	ON CONFLICT (user_id) 
 	SET refresh_token = $2, expiration_time = $3
 	WHERE tokens.user_id = $1
+`
+
+var checkRefreshTokenQuery = `
+	SELECT users.user_id, users.nickname, tokens.expiration_time
+	FROM tokens JOIN users
+	ON users.user_id = tokens.user_id 
+	WHERE token = $1
 `

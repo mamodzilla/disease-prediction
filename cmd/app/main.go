@@ -22,12 +22,9 @@ func main() {
 
 	r := mux.NewRouter()
 
-	account := r.PathPrefix("/account").Subrouter()
-	{
-		account.HandleFunc("/register", accountHandler.Register).Methods("POST")
-		account.HandleFunc("/login", accountHandler.Login).Methods("POST")
-		account.HandleFunc("/refreshTokens", accountHandler.RefreshTokens).Methods("POST")
-	}
+	r.HandleFunc("/register", accountHandler.Register).Methods("POST")
+	r.HandleFunc("/login", accountHandler.Login).Methods("POST")
+	r.HandleFunc("/refreshTokens", accountHandler.RefreshTokens).Methods("POST")
 
 	serverfuncs.Run(cfg, r)
 }

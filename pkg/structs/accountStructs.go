@@ -14,8 +14,8 @@ type UserLogin struct {
 }
 
 type AccessTokenClaims struct {
-	UserId  int  `json:"user_id"`
-	IsAdmin bool `json:"is_admin"`
+	UserId   int    `json:"user_id"`
+	Nickname string `json:"nickname"`
 	jwt.RegisteredClaims
 }
 
