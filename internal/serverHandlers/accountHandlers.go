@@ -117,3 +117,25 @@ func (a *AccountHandler) Login(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 500)
 	}
 }
+
+func (a *AccountHandler) RefreshTokens(w http.ResponseWriter, r *http.Request) {
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+	defer func() {
+		err := r.Body.Close()
+		if err != nil {
+			fmt.Println(err)
+		}
+	}()
+
+	var data structs.RefreshTokensRequest
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+}

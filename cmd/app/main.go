@@ -26,6 +26,7 @@ func main() {
 	{
 		account.HandleFunc("/register", accountHandler.Register).Methods("POST")
 		account.HandleFunc("/login", accountHandler.Login).Methods("POST")
+		account.HandleFunc("/refreshTokens", accountHandler.RefreshTokens).Methods("POST")
 	}
 
 	serverfuncs.Run(cfg, r)
