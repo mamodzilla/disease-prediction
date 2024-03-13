@@ -1,33 +1,39 @@
 
 
+services: 
+  db:
+    image: postgres
+    restart: always
+    ports: 
+      - ${DB_HOST}:${DB_HOST}
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - /var/lib/postgresql/data
+    env_file: 
+      - .env
+    container_name: postgres_db
 
-db:
-  image: postgres
-  restart: always
-  ports: 
-    - 5432:5432
-  environment:
-    - POSTGRES_USER=postgres
-    - POSTGRES_PASSWORD=helloworld
-    - POSTGRES_DB=disease_prediction_db
-  volumes:
-    - /var/lib/postgresql/data
-  container_name: postgres_db
+  adminer:
+    image: adminer
+    restart: always
+    ports: 
+      - ${ADMINER_HOST}:${ADMINER_HOST}
+    env_file: 
+      - .env
 
-adminer:
-  image: adminer
-  restart: always
-  ports: 
-    - 8010:8010
-
-migration:
-  image: postgres 
-  depends_on:
-    - db
-  volumes:
-    - ./pkg/db/schema/:/pkg/db/schema/
-  command: ["psql", "-h", "db", "-U", "postgres", "-d", "disease_prediction_db", "-a", "-f", "/pkg/db/schema/init.up.sql"]
-  environment: 
-    - PGPASSWORD=helloworld
-  restart: on-failure
-  container_name: migration
+  migration:
+    image: postgres 
+    depends_on:
+      - db
+    volumes:
+      - ./pkg/db/schema/:/pkg/db/schema/
+    command: ["psql", "-h", "db", "-U", "${DB_USER}", "-d", "${DB_NAME}", "-a", "-f", "/pkg/db/schema/init.up.sql"]
+    environment: 
+      - PGPASSWORD=${DB_PASSWORD}
+    restart: on-failure
+    env_file: 
+      - .env
+    container_name: migration
