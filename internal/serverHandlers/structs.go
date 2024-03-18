@@ -13,3 +13,7 @@ type Server struct {
 type AccountHandler struct {
 	Server *Server
 }
+
+type UserHandler struct {
+	Server *Server
+}

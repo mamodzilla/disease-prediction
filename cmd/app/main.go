@@ -19,12 +19,15 @@ func main() {
 
 	server := serverhandlers.NewServer(db, cfg)
 	accountHandler := server.NewAccountHandler()
+	userHandler := server.NewUserHandler()
 
 	r := mux.NewRouter()
 
 	r.HandleFunc("/register", accountHandler.Register).Methods("POST")
 	r.HandleFunc("/login", accountHandler.Login).Methods("POST")
 	r.HandleFunc("/refreshTokens", accountHandler.RefreshTokens).Methods("POST")
+
+	r.HandleFunc("/profile", userHandler.GetProfile).Methods("GET")
 
 	serverfuncs.Run(cfg, r)
 }

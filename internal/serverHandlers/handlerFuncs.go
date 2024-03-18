@@ -12,3 +12,7 @@ func NewServer(db *dbutils.DiseasePredictionDb, cfg *structs.Config) *Server {
 func (s *Server) NewAccountHandler() *AccountHandler {
 	return &AccountHandler{Server: s}
 }
+
+func (s *Server) NewUserHandler() *UserHandler {
+	return &UserHandler{Server: s}
+}
