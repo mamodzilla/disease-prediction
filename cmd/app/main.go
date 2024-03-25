@@ -22,6 +22,8 @@ func main() {
 	accountHandler := server.NewAccountHandler()
 	userHandler := server.NewUserHandler()
 
+	authMiddleware := middlewares.AuthMiddlewareWrapper(cfg)
+
 	r := mux.NewRouter()
 
 	r.HandleFunc("/register", accountHandler.Register).Methods("POST")
@@ -29,7 +31,7 @@ func main() {
 	r.HandleFunc("/refresh-tokens", accountHandler.RefreshTokens).Methods("POST")
 
 	user := r.PathPrefix("/user").Subrouter()
-	user.Use(middlewares.AuthMiddleware)
+	user.Use(authMiddleware)
 	{
 		user.HandleFunc("/profile", userHandler.GetProfile).Methods("GET")
 	}

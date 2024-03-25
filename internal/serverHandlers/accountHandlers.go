@@ -68,9 +68,8 @@ func (a *AccountHandler) Login(w http.ResponseWriter, r *http.Request) {
 
 	var userId int
 	var isAdmin bool
-	var nickname string
 	var userPassword string
-	err = stmt.QueryRow(data.Email).Scan(&userId, &nickname, &userPassword)
+	err = stmt.QueryRow(data.Email).Scan(&userId, &isAdmin, &userPassword)
 	if err != nil {
 		http.Error(w, err.Error(), 400)
 		return
@@ -82,7 +81,7 @@ func (a *AccountHandler) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	accessToken, err := utils.GenerateAccessToken(userId, isAdmin, nickname, a.Server.Cfg.Server.SigningKey)
+	accessToken, err := utils.GenerateAccessToken(userId, isAdmin, a.Server.Cfg.Server.SigningKey)
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return
@@ -141,7 +140,7 @@ func (a *AccountHandler) RefreshTokens(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	userId, isAdmin, nickname, exists, err := a.Server.AppDb.CheckRefreshToken(data.RefreshToken)
+	userId, isAdmin, exists, err := a.Server.AppDb.CheckRefreshToken(data.RefreshToken)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			http.Error(w, err.Error(), 400)
@@ -152,7 +151,7 @@ func (a *AccountHandler) RefreshTokens(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if !exists {
-		accessToken, err := utils.GenerateAccessToken(userId, isAdmin, nickname, a.Server.Cfg.Server.SigningKey)
+		accessToken, err := utils.GenerateAccessToken(userId, isAdmin, a.Server.Cfg.Server.SigningKey)
 		if err != nil {
 			http.Error(w, err.Error(), 500)
 			return
