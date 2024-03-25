@@ -16,7 +16,7 @@ var addRefreshTokenQuery = `
 `
 
 var checkRefreshTokenQuery = `
-	SELECT users.user_id, users.nickname, tokens.expiration_time
+	SELECT users.user_id, users.is_admin, users.nickname, tokens.expiration_time
 	FROM tokens JOIN users
 	ON users.user_id = tokens.user_id 
 	WHERE token = $1

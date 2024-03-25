@@ -7,9 +7,10 @@ import (
 	"github.com/golang-jwt/jwt/v4"
 )
 
-func GenerateAccessToken(userId int, nickname string, signingKey string) (string, error) {
+func GenerateAccessToken(userId int, isAdmin bool, nickname string, signingKey string) (string, error) {
 	accessTokenClaims := structs.AccessTokenClaims{
 		UserId:   userId,
+		IsAdmin:  isAdmin,
 		Nickname: nickname,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Minute * 20)),

@@ -2,6 +2,7 @@ package main
 
 import (
 	"back-end/configs"
+	middlewares "back-end/internal/middlewares"
 	serverfuncs "back-end/internal/serverFuncs"
 	serverhandlers "back-end/internal/serverHandlers"
 	"log"
@@ -25,9 +26,13 @@ func main() {
 
 	r.HandleFunc("/register", accountHandler.Register).Methods("POST")
 	r.HandleFunc("/login", accountHandler.Login).Methods("POST")
-	r.HandleFunc("/refreshTokens", accountHandler.RefreshTokens).Methods("POST")
+	r.HandleFunc("/refresh-tokens", accountHandler.RefreshTokens).Methods("POST")
 
-	r.HandleFunc("/profile", userHandler.GetProfile).Methods("GET")
+	user := r.PathPrefix("/user").Subrouter()
+	user.Use(middlewares.AuthMiddleware)
+	{
+		user.HandleFunc("/profile", userHandler.GetProfile).Methods("GET")
+	}
 
 	serverfuncs.Run(cfg, r)
 }
