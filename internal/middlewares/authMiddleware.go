@@ -25,7 +25,9 @@ func AuthMiddleware(cfg *structs.Config, next http.Handler) http.Handler {
 			fmt.Fprint(w, "Authorization header is missing!")
 			return
 		}
+
 		tokenStr := strings.Split(authHeader, "Bearer ")[1]
+
 		var claims structs.AccessTokenClaims
 		token, err := jwt.ParseWithClaims(tokenStr, &claims, func(token *jwt.Token) (interface{}, error) {
 			return []byte(cfg.SigningKey), nil
@@ -37,7 +39,7 @@ func AuthMiddleware(cfg *structs.Config, next http.Handler) http.Handler {
 			return
 		}
 
-		var ctxKey CtxKey
+		var ctxKey structs.CtxKey
 		ctx := context.WithValue(r.Context(), ctxKey, map[string]interface{}{
 			"userId":  claims.UserId,
 			"isAdmin": claims.IsAdmin,

@@ -34,8 +34,12 @@ func (a *AccountHandler) Register(w http.ResponseWriter, r *http.Request) {
 	}
 	err = a.Server.AppDb.CreateUser(data)
 	if err != nil {
-		http.Error(w, err.Error(), 500)
-		return
+		if err == sql.ErrNoRows {
+			fmt.Fprint(w, "The user already exists!")
+		} else {
+			http.Error(w, err.Error(), 500)
+			return
+		}
 	}
 	w.WriteHeader(201)
 }
@@ -112,12 +116,12 @@ func (a *AccountHandler) Login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(200)
 	_, err = w.Write(jsonData)
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return
 	}
+	w.WriteHeader(200)
 }
 
 func (a *AccountHandler) RefreshTokens(w http.ResponseWriter, r *http.Request) {

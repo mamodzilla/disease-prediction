@@ -3,7 +3,9 @@ CREATE TABLE IF NOT EXISTS users (
     nickname VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    is_admin BOOLEAN DEFAULT FALSE
+    is_admin BOOLEAN DEFAULT FALSE,
+
+    UNIQUE (email)
 );
 
 CREATE TABLE IF NOT EXISTS tokens (
@@ -12,19 +14,21 @@ CREATE TABLE IF NOT EXISTS tokens (
     refresh_token VARCHAR,
     expiration_time BIGINT, 
 
+    UNIQUE (user_id),
     FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
-CREATE TABLE IF NOT EXISTS user_information (
+CREATE TABLE IF NOT EXISTS user_profile (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL, 
-    gender VARCHAR(255) NULL, 
     birth_date DATE NULL,
-    job VARCHAR(255) NULL,
+    gender VARCHAR(255) NULL, 
     marital_status VARCHAR(255) NULL,
     having_children BOOLEAN NULL, 
+    job VARCHAR(255) NULL,
     location VARCHAR(255),
 
+    UNIQUE (user_id), 
     FOREIGN KEY(user_id) REFERENCES users(id)
 );
 

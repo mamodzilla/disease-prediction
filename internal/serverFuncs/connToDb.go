@@ -5,6 +5,8 @@ import (
 	"back-end/pkg/structs"
 	"database/sql"
 	"fmt"
+
+	_ "github.com/lib/pq"
 )
 
 func NewConnToDb(cfg *structs.Config) (*dbutils.DiseasePredictionDb, error) {
