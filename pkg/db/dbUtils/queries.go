@@ -9,7 +9,7 @@ var createUserQuery = `
 `
 
 var createUserProfileQuery = `
-	INSERT INTO user_profile (user_id, birth_date, gender, marital_status, having_children, job, location)
+	INSERT INTO user_profiles (user_id, birth_date, gender, marital_status, having_children, job, location)
 	VALUES ($1, $2, $3, $4, $5, $6, $7)
 `
 
@@ -37,7 +37,19 @@ var checkRefreshTokenQuery = `
 
 var getUserProfileQuery = `
 	SELECT nickname, email, password, birth_date, gender, marital_status, having_children, job, location 
-	FROM users JOIN user_profile
-	ON users.id = user_profile.user_id
+	FROM users JOIN user_profiles
+	ON users.id = user_profiles.user_id
 	WHERE users.id = $1
+`
+
+var updateUserDataQuery = `
+	UPDATE users
+	SET nickname = $1, email = $2, password = $3 
+	WHERE id = $4
+`
+
+var updateUserProfileQuery = `
+	UPDATE user_profiles
+	SET birth_date = $1, gender = $2, marital_status = $3, having_children = $4, job = $5, location = $6
+	WHERE user_id = $7
 `

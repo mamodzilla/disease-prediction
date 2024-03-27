@@ -26,6 +26,18 @@ type UserProfileResponse struct {
 	Location       string `json:"location"`
 }
 
+type UpdateUserProfileRequest struct {
+	Nickname       string `json:"nickname"`
+	Email          string `json:"email"`
+	Password       string `json:"password"`
+	BirthDate      string `json:"birth_date"`
+	Gender         string `json:"gender"`
+	MaritalStatus  string `json:"marital_status"`
+	HavingChildren bool   `json:"having_children"`
+	Job            string `json:"job"`
+	Location       string `json:"location"`
+}
+
 type ChangePassword struct {
 	OldPassword string
 	NewPassword string

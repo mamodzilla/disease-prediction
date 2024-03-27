@@ -3,6 +3,8 @@ package serverhandlers
 import (
 	"back-end/pkg/structs"
 	"encoding/json"
+	"fmt"
+	"io"
 	"net/http"
 )
 
@@ -41,5 +43,38 @@ func (u *UserHandler) GetProfile(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 500)
 		return
 	}
+	w.WriteHeader(200)
+}
+
+func (u *UserHandler) UpdateProfile(w http.ResponseWriter, r *http.Request) {
+	var ctxKey structs.CtxKey
+	values := r.Context().Value(ctxKey).(map[string]interface{})
+	userId := values["userId"].(int)
+
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+	defer func() {
+		err := r.Body.Close()
+		if err != nil {
+			fmt.Println(err)
+		}
+	}()
+
+	var data structs.UpdateUserProfileRequest
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	err = u.Server.AppDb.UpdateUserProfile(userId, data)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
 	w.WriteHeader(200)
 }

@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS tokens (
     FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
-CREATE TABLE IF NOT EXISTS user_profile (
+CREATE TABLE IF NOT EXISTS user_profiles (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL, 
     birth_date DATE NULL,
@@ -38,6 +38,11 @@ CREATE TABLE IF NOT EXISTS diseases (
     disease_description TEXT NULL,
     disease_duration INT NULL, 
     disease_location VARCHAR(255) NOT NULL,
+);
+
+CREATE TABLE IF NOT EXISTS questions (
+    id SERIAL PRIMARY KEY,
+    disease_id INT NOT NULL, 
     question_1 VARCHAR(255) NULL, 
     question_2 VARCHAR(255) NULL, 
     question_3 VARCHAR(255) NULL, 
@@ -58,7 +63,9 @@ CREATE TABLE IF NOT EXISTS diseases (
     question_18 VARCHAR(255) NULL, 
     question_19 VARCHAR(255) NULL, 
     question_20 VARCHAR(255) NULL
-);
+
+    FOREIGN KEY(disease_id) REFERENCES diseases(id) ON DELETE CASCADE
+);  
 
 CREATE TABLE IF NOT EXISTS diagnoses (
     id SERIAL PRIMARY KEY,
