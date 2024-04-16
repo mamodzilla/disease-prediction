@@ -39,7 +39,7 @@ func main() {
 
 		questions := user.PathPrefix("/questions").Subrouter()
 		{
-			questions.HandleFunc("/personal", questionHandler.GetPersonalQuestions).Methods("GET")
+			questions.HandleFunc("/{disease-id:[0-9]+}", questionHandler.GetDiseaseQuestions).Methods("GET")
 		}
 	}
 
