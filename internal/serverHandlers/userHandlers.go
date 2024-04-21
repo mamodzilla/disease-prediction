@@ -16,7 +16,7 @@ func (u *UserHandler) GetProfile(w http.ResponseWriter, r *http.Request) {
 	var rawResponse structs.UserProfileRawResponse
 	err := u.Server.AppDb.GetUserProfile(userId).Scan(&rawResponse.Nickname, &rawResponse.Email, &rawResponse.Password, &rawResponse.BirthDate, &rawResponse.Gender, &rawResponse.MaritalStatus, &rawResponse.HavingChildren, &rawResponse.Job, &rawResponse.Location)
 	if err != nil {
-		http.Error(w, err.Error(), 500)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
@@ -34,16 +34,16 @@ func (u *UserHandler) GetProfile(w http.ResponseWriter, r *http.Request) {
 
 	jsonData, err := json.Marshal(response)
 	if err != nil {
-		http.Error(w, err.Error(), 500)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
 	_, err = w.Write(jsonData)
 	if err != nil {
-		http.Error(w, err.Error(), 500)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	w.WriteHeader(200)
+	w.WriteHeader(http.StatusOK)
 }
 
 func (u *UserHandler) UpdateProfile(w http.ResponseWriter, r *http.Request) {
@@ -53,7 +53,7 @@ func (u *UserHandler) UpdateProfile(w http.ResponseWriter, r *http.Request) {
 
 	body, err := io.ReadAll(r.Body)
 	if err != nil {
-		http.Error(w, err.Error(), 400)
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 	defer func() {
@@ -66,15 +66,19 @@ func (u *UserHandler) UpdateProfile(w http.ResponseWriter, r *http.Request) {
 	var data structs.UpdateUserProfileRequest
 	err = json.Unmarshal(body, &data)
 	if err != nil {
-		http.Error(w, err.Error(), 400)
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
 	err = u.Server.AppDb.UpdateUserProfile(userId, data)
 	if err != nil {
-		http.Error(w, err.Error(), 500)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	w.WriteHeader(200)
+	w.WriteHeader(http.StatusOK)
+}
+
+func (u *UserHandler) GetDiseaseQuestions(w http.ResponseWriter, r *http.Request) {
+
 }

@@ -21,7 +21,6 @@ func main() {
 	server := serverhandlers.NewServer(db, cfg)
 	accountHandler := server.NewAccountHandler()
 	userHandler := server.NewUserHandler()
-	questionHandler := server.NewQuestionHandler()
 
 	authMiddleware := middlewares.AuthMiddlewareWrapper(cfg)
 
@@ -37,10 +36,7 @@ func main() {
 		user.HandleFunc("/profile", userHandler.GetProfile).Methods("GET")
 		user.HandleFunc("/update-profile", userHandler.UpdateProfile).Methods("PUT")
 
-		questions := user.PathPrefix("/questions").Subrouter()
-		{
-			questions.HandleFunc("/{disease-id:[0-9]+}", questionHandler.GetDiseaseQuestions).Methods("GET")
-		}
+		user.HandleFunc("/questions", userHandler.GetDiseaseQuestions).Methods("POST")
 	}
 
 	serverfuncs.Run(cfg, r)

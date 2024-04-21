@@ -6,9 +6,11 @@ type Config struct {
 }
 
 type Server struct {
-	Host       string
-	Port       string
-	SigningKey string
+	Host                string
+	Port                string
+	SigningKey          string
+	AccessTokenExpTime  int
+	RefreshTokenExpTime int
 }
 
 type Db struct {

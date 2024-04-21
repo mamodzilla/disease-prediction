@@ -17,7 +17,3 @@ type AccountHandler struct {
 type UserHandler struct {
 	Server *Server
 }
-
-type QuestionHandler struct {
-	Server *Server
-}

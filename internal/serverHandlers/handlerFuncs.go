@@ -16,7 +16,3 @@ func (s *Server) NewAccountHandler() *AccountHandler {
 func (s *Server) NewUserHandler() *UserHandler {
 	return &UserHandler{Server: s}
 }
-
-func (s *Server) NewQuestionHandler() *QuestionHandler {
-	return &QuestionHandler{Server: s}
-}
