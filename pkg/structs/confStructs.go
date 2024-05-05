@@ -11,6 +11,9 @@ type Server struct {
 	SigningKey          string
 	AccessTokenExpTime  int
 	RefreshTokenExpTime int
+	NnHost              string
+	NnPort              string
+	CtxKey              CtxKey
 }
 
 type Db struct {

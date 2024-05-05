@@ -24,6 +24,10 @@ func NewConfig() *structs.Config {
 	cfg.Server.Host = os.Getenv("SERVER_HOST")
 	cfg.Server.Port = os.Getenv("SERVER_PORT")
 	cfg.Server.SigningKey = os.Getenv("SIGNING_KEY")
+
+	cfg.Server.NnHost = os.Getenv("NN_HOST")
+	cfg.Server.NnPort = os.Getenv("NN_PORT")
+
 	cfg.Server.AccessTokenExpTime, err = strconv.Atoi(os.Getenv("ACCESS_TOKEN_EXP_TIME"))
 	if err != nil {
 		log.Println("Access token expiration time wasn't get!")
@@ -33,6 +37,8 @@ func NewConfig() *structs.Config {
 	if err != nil {
 		log.Println("Refresh token expiration time wasn't get!")
 	}
+
+	cfg.CtxKey = structs.CtxKey{}
 
 	cfg.Db.Host = os.Getenv("DB_HOST")
 	cfg.Db.Port = os.Getenv("DB_PORT")

@@ -42,3 +42,25 @@ type ChangePassword struct {
 	OldPassword string
 	NewPassword string
 }
+
+type DiagnoseRequest struct {
+	SymptomText string `json:"symptom_text"`
+}
+
+type DiagnoseResponse struct {
+	DiseaseName        string `json:"disease_name"`
+	DiseaseDescription string `json:"disease_description"`
+}
+
+type DiagnoseItemResponse struct {
+	DiagnoseId  int    `json:"disease_id"`
+	DiseaseName string `json:"disease_name"`
+	StartDate   string `json:"start_date"`
+	EndDate     string `json:"end_date"`
+}
+
+type DiagnoseDataResponse struct {
+	SymptomText        string `json:"symptom_text"`
+	DiseaseName        string `json:"disease_name"`
+	DiseaseDescription string `json:"disease_description"`
+}

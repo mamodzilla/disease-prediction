@@ -55,7 +55,28 @@ const (
 		WHERE user_id = $7
 	`
 
-	getDiseaseQuestionsQuery = `
-		
+	noteDiagnoseQuery = `
+		INSERT INTO diagnoses (user_id, start_date)
+		VALUES ($1, $2)
+		RETURNING id
+	`
+
+	noteDiagnoseDataQuery = `
+		INSERT INTO diagnose_data (diagnose_id, symptom_text, disease_name, disease_description)
+		VALUES ($1, $2, $3, $4)
+	`
+
+	getUserDiagnoseListQuery = `
+		SELECT diagnose_id, disease_name, start_date, end_date 
+		FROM diagnoses JOIN diagnose_data
+		ON diagnoses.id = diagnose_data.diagnose_id
+		WHERE user_id = $1
+	`
+
+	getUserDiagnoseData = `
+		SELECT symptom_text, disease_name, disease_description
+		FROM diagnose_data JOIN diagnoses
+		ON diagnoses.id = diagnose_data.diagnose_id
+		WHERE diagnose_id = $1 AND user_id = $2
 	`
 )

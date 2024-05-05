@@ -36,7 +36,10 @@ func main() {
 		user.HandleFunc("/profile", userHandler.GetProfile).Methods("GET")
 		user.HandleFunc("/update-profile", userHandler.UpdateProfile).Methods("PUT")
 
-		user.HandleFunc("/questions", userHandler.GetDiseaseQuestions).Methods("POST")
+		user.HandleFunc("/diagnose", userHandler.Diagnose).Methods("POST")
+
+		user.HandleFunc("/disease-list", userHandler.GetDiagnoseList).Methods("GET")
+		user.HandleFunc("disease-data/{disease-id:[0-9]+}", userHandler.GetDiagnoseData).Methods("GET")
 	}
 
 	serverfuncs.Run(cfg, r)
