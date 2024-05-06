@@ -19,12 +19,15 @@ func main() {
 	}
 
 	server := serverhandlers.NewServer(db, cfg)
+	commonHandler := server.NewCommonHandler()
 	accountHandler := server.NewAccountHandler()
 	userHandler := server.NewUserHandler()
 
 	authMiddleware := middlewares.AuthMiddlewareWrapper(cfg)
 
 	r := mux.NewRouter()
+
+	r.HandleFunc("/diagnose", commonHandler.Diagnose).Methods("POST")
 
 	r.HandleFunc("/register", accountHandler.Register).Methods("POST")
 	r.HandleFunc("/login", accountHandler.Login).Methods("POST")
@@ -39,7 +42,10 @@ func main() {
 		user.HandleFunc("/diagnose", userHandler.Diagnose).Methods("POST")
 
 		user.HandleFunc("/disease-list", userHandler.GetDiagnoseList).Methods("GET")
-		user.HandleFunc("disease-data/{disease-id:[0-9]+}", userHandler.GetDiagnoseData).Methods("GET")
+		user.HandleFunc("/disease-data/{user-diagnose-id:[0-9]+}", userHandler.GetDiagnoseData).Methods("GET")
+		user.HandleFunc("/add-end-date", userHandler.AddEndDate).Methods("PUT")
+
+		user.HandleFunc("/statistics", userHandler.GetStatistics).Methods("GET")
 	}
 
 	serverfuncs.Run(cfg, r)

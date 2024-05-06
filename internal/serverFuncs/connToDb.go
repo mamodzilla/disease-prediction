@@ -1,8 +1,8 @@
 package serverfuncs
 
 import (
-	dbutils "back-end/pkg/db/dbUtils"
-	"back-end/pkg/structs"
+	dbutils "back-end/internal/pkg/db/dbUtils"
+	"back-end/internal/pkg/structs"
 	"database/sql"
 	"fmt"
 

@@ -1,7 +1,7 @@
 package middlewares
 
 import (
-	"back-end/pkg/structs"
+	"back-end/internal/pkg/structs"
 	"context"
 	"fmt"
 	"net/http"

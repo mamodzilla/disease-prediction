@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"back-end/pkg/structs"
+	"back-end/internal/pkg/structs"
 	"time"
 
 	"github.com/golang-jwt/jwt/v4"

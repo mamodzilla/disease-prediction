@@ -1,7 +1,7 @@
 package serverfuncs
 
 import (
-	"back-end/pkg/structs"
+	"back-end/internal/pkg/structs"
 	"log"
 	"net/http"
 

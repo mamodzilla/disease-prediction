@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS user_profiles (
 CREATE TABLE IF NOT EXISTS diagnoses (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
+    user_diagnose_id INT NOT NULL, 
     start_date VARCHAR(255) NULL,
     end_date VARCHAR(255) NULL,
 

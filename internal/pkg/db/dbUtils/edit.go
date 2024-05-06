@@ -1,8 +1,8 @@
 package dbutils
 
 import (
+	"back-end/internal/pkg/structs"
 	"back-end/internal/utils"
-	"back-end/pkg/structs"
 )
 
 func (d *DiseasePredictionDb) UpdateUserProfile(userId int, data structs.UpdateUserProfileRequest) error {
@@ -17,6 +17,15 @@ func (d *DiseasePredictionDb) UpdateUserProfile(userId int, data structs.UpdateU
 	}
 
 	_, err = d.Db.Exec(updateUserProfileQuery, data.BirthDate, data.Gender, data.MaritalStatus, data.HavingChildren, data.Job, data.Location, userId)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (d *DiseasePredictionDb) UpdateDiagnoseEndDate(userId int, userDiagnoseId int, endDate string) error {
+	_, err := d.Db.Exec(updateDiagnoseEndDateQuery, endDate, userId, userDiagnoseId)
 	if err != nil {
 		return err
 	}

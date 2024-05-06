@@ -1,7 +1,7 @@
 package configs
 
 import (
-	"back-end/pkg/structs"
+	"back-end/internal/pkg/structs"
 	"log"
 	"os"
 	"strconv"

@@ -53,14 +53,24 @@ type DiagnoseResponse struct {
 }
 
 type DiagnoseItemResponse struct {
-	DiagnoseId  int    `json:"disease_id"`
-	DiseaseName string `json:"disease_name"`
-	StartDate   string `json:"start_date"`
-	EndDate     string `json:"end_date"`
+	UserDiagnoseId int    `json:"user_diagnose_id"`
+	DiseaseName    string `json:"disease_name"`
+	StartDate      string `json:"start_date"`
+	EndDate        string `json:"end_date"`
 }
 
 type DiagnoseDataResponse struct {
 	SymptomText        string `json:"symptom_text"`
 	DiseaseName        string `json:"disease_name"`
 	DiseaseDescription string `json:"disease_description"`
+}
+
+type StatisticsResponse struct {
+	NumberRecordedDiseases       int `json:"number_recorded_diseases"`
+	NumberAnnualRecordedDiseases int `json:"number_annual_recorded_diseases"`
+}
+
+type EndDateRequest struct {
+	UserDiagnoseId int    `json:"user_diagnose_id"`
+	EndDate        string `json:"end_date"`
 }

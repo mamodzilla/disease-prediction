@@ -56,8 +56,8 @@ const (
 	`
 
 	noteDiagnoseQuery = `
-		INSERT INTO diagnoses (user_id, start_date)
-		VALUES ($1, $2)
+		INSERT INTO diagnoses (user_id, user_diagnose_id, start_date)
+		VALUES ($1, $2, $3)
 		RETURNING id
 	`
 
@@ -67,16 +67,30 @@ const (
 	`
 
 	getUserDiagnoseListQuery = `
-		SELECT diagnose_id, disease_name, start_date, end_date 
+		SELECT user_diagnose_id, disease_name, start_date, end_date 
 		FROM diagnoses JOIN diagnose_data
 		ON diagnoses.id = diagnose_data.diagnose_id
 		WHERE user_id = $1
+	`
+
+	getUserDiagnoseNumberQuery = `
+		SELECT COUNT(*) AS user_diagnose_count
+		FROM diagnoses
+		WHERE user_id = $1
+		GROUP BY user_id
+		RETURNING user_diagnose_count
 	`
 
 	getUserDiagnoseData = `
 		SELECT symptom_text, disease_name, disease_description
 		FROM diagnose_data JOIN diagnoses
 		ON diagnoses.id = diagnose_data.diagnose_id
-		WHERE diagnose_id = $1 AND user_id = $2
+		WHERE user_diagnose_id = $1 AND user_id = $2
+	`
+
+	updateDiagnoseEndDateQuery = `
+		UPDATE diagnoses
+		SET end_date = $1
+		WHERE user_id = $2 AND user_diagnose_id = $3
 	`
 )
