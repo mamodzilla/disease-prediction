@@ -42,7 +42,7 @@ func (a *AccountHandler) RefreshTokens(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if !exists {
+	if exists {
 		accessToken, err := utils.GenerateAccessToken(userId, isAdmin, a.Server.Cfg.SigningKey, a.Server.Cfg.AccessTokenExpTime)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -61,6 +61,7 @@ func (a *AccountHandler) RefreshTokens(w http.ResponseWriter, r *http.Request) {
 		}
 
 		expirationTime := time.Now().Add(time.Hour * 24 * time.Duration(a.Server.Cfg.RefreshTokenExpTime)).Unix()
+		fmt.Println(userId)
 		err = a.Server.AppDb.AddRefreshToken(userId, refreshToken, int(expirationTime))
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -81,8 +82,6 @@ func (a *AccountHandler) RefreshTokens(w http.ResponseWriter, r *http.Request) {
 		}
 		w.WriteHeader(http.StatusOK)
 	} else {
-		w.Header().Set("Content-Type", "text/plain")
-		fmt.Fprintf(w, "The refresh token is still valid")
-		w.WriteHeader(http.StatusOK)
+		w.WriteHeader(http.StatusUnauthorized)
 	}
 }

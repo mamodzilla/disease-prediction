@@ -41,8 +41,8 @@ func main() {
 
 		user.HandleFunc("/diagnose", userHandler.Diagnose).Methods("POST")
 
-		user.HandleFunc("/disease-list", userHandler.GetDiagnoseList).Methods("GET")
-		user.HandleFunc("/disease-data/{user-diagnose-id:[0-9]+}", userHandler.GetDiagnoseData).Methods("GET")
+		user.HandleFunc("/diagnose-list", userHandler.GetDiagnoseList).Methods("GET")
+		user.HandleFunc("/diagnose-data/{user-diagnose-id:[0-9]+}", userHandler.GetDiagnoseData).Methods("GET")
 		user.HandleFunc("/add-end-date", userHandler.AddEndDate).Methods("PUT")
 
 		user.HandleFunc("/statistics", userHandler.GetStatistics).Methods("GET")

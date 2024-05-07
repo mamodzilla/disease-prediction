@@ -2,7 +2,9 @@ package serverhandlers
 
 import (
 	"back-end/internal/pkg/structs"
+	"database/sql"
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -12,13 +14,23 @@ func (u *UserHandler) GetStatistics(w http.ResponseWriter, r *http.Request) {
 
 	var statisticsResponse structs.StatisticsResponse
 	if err := u.Server.AppDb.GetNumberRecordedDiseases(userId).Scan(&statisticsResponse.NumberRecordedDiseases); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		if err != sql.ErrNoRows {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		} else {
+			w.WriteHeader(http.StatusInternalServerError)
+			fmt.Fprintf(w, "The user doesn't have recorded diagnoses!")
+		}
 		return
 	}
 
 	numberAnnualRecordedDiseases, err := u.Server.AppDb.GetNumberAnnualRecordedDiseases(userId)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		if err != sql.ErrNoRows {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		} else {
+			w.WriteHeader(http.StatusInternalServerError)
+			fmt.Fprintf(w, "The user doesn't have recorded diagnoses!")
+		}
 		return
 	}
 	statisticsResponse.NumberAnnualRecordedDiseases = numberAnnualRecordedDiseases

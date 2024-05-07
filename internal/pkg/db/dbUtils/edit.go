@@ -3,6 +3,7 @@ package dbutils
 import (
 	"back-end/internal/pkg/structs"
 	"back-end/internal/utils"
+	"database/sql"
 )
 
 func (d *DiseasePredictionDb) UpdateUserProfile(userId int, data structs.UpdateUserProfileRequest) error {
@@ -24,11 +25,11 @@ func (d *DiseasePredictionDb) UpdateUserProfile(userId int, data structs.UpdateU
 	return nil
 }
 
-func (d *DiseasePredictionDb) UpdateDiagnoseEndDate(userId int, userDiagnoseId int, endDate string) error {
-	_, err := d.Db.Exec(updateDiagnoseEndDateQuery, endDate, userId, userDiagnoseId)
+func (d *DiseasePredictionDb) UpdateDiagnoseEndDate(userId int, userDiagnoseId int, endDate string) (sql.Result, error) {
+	sqlRes, err := d.Db.Exec(updateDiagnoseEndDateQuery, endDate, userId, userDiagnoseId)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	return nil
+	return sqlRes, nil
 }

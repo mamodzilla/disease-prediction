@@ -19,12 +19,6 @@ func (d *DiseasePredictionDb) GetUserDiagnoseList(userId int) (*sql.Rows, error)
 	if err != nil {
 		return nil, err
 	}
-	defer func() {
-		err := rows.Close()
-		if err != nil {
-			log.Println(err)
-		}
-	}()
 
 	return rows, nil
 }
@@ -38,7 +32,7 @@ func (d *DiseasePredictionDb) GetNumberRecordedDiseases(userId int) *sql.Row {
 }
 
 func (d *DiseasePredictionDb) GetNumberAnnualRecordedDiseases(userId int) (int, error) {
-	rows, err := d.Db.Query(getUserDiagnoseListQuery, userId)
+	rows, err := d.Db.Query(getUserDiagnoseStartDates, userId)
 	if err != nil {
 		return -1, err
 	}
@@ -75,8 +69,8 @@ func (d *DiseasePredictionDb) CheckRefreshToken(refreshToken string) (int, bool,
 		return -1, false, false, err
 	}
 
-	if expirationTime > time.Now().Unix() {
-		return -1, isAdmin, true, nil
+	if expirationTime < time.Now().Unix() {
+		return -1, isAdmin, false, nil
 	}
-	return userId, isAdmin, false, nil
+	return userId, isAdmin, true, nil
 }

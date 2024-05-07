@@ -29,8 +29,8 @@ services:
     depends_on:
       - db
     volumes:
-      - ./pkg/db/schema/:/pkg/db/schema/
-    command: ["psql", "-h", "db", "-U", "${DB_USER}", "-d", "${DB_NAME}", "-a", "-f", "/pkg/db/schema/init.up.sql"]
+      - ./internal/pkg/db/schema/:/internal/pkg/db/schema/
+    command: ["psql", "-h", "db", "-U", "${DB_USER}", "-d", "${DB_NAME}", "-a", "-f", "/internal/pkg/db/schema/init.up.sql"]
     environment: 
       - PGPASSWORD=${DB_PASSWORD}
     restart: on-failure

@@ -2,6 +2,7 @@ package serverhandlers
 
 import (
 	"back-end/internal/pkg/structs"
+	"bytes"
 	"encoding/json"
 	"io"
 	"log"
@@ -66,7 +67,7 @@ func (u *UserHandler) Diagnose(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp, err := http.Post("http://"+u.Server.Cfg.NnHost+":"+u.Server.Cfg.NnPort, "application/json", r.Body)
+	resp, err := http.Post("http://"+u.Server.Cfg.NnHost+":"+u.Server.Cfg.NnPort, "application/json", bytes.NewReader(body))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

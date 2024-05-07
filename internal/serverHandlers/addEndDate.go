@@ -3,6 +3,7 @@ package serverhandlers
 import (
 	"back-end/internal/pkg/structs"
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 )
@@ -23,9 +24,21 @@ func (u *UserHandler) AddEndDate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := u.Server.AppDb.UpdateDiagnoseEndDate(userId, endDateRequest.UserDiagnoseId, endDateRequest.EndDate); err != nil {
+	sqlRes, err := u.Server.AppDb.UpdateDiagnoseEndDate(userId, endDateRequest.UserDiagnoseId, endDateRequest.EndDate)
+	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	rowsAffected, err := sqlRes.RowsAffected()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	if rowsAffected == 0 {
+		w.WriteHeader(http.StatusBadRequest)
+		fmt.Fprintf(w, "The user specified a non-existent diagnose id!")
+	}
+
 	w.WriteHeader(http.StatusOK)
 }

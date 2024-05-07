@@ -2,6 +2,7 @@ package serverhandlers
 
 import (
 	"back-end/internal/pkg/structs"
+	"database/sql"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -29,7 +30,12 @@ func (u *UserHandler) GetDiagnoseData(w http.ResponseWriter, r *http.Request) {
 		var diagnoseData structs.DiagnoseDataResponse
 		err = u.Server.AppDb.GetUserDiagnoseData(userDiagnoseId, userId).Scan(&diagnoseData.SymptomText, &diagnoseData.DiseaseName, &diagnoseData.DiseaseDescription)
 		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
+			if err != sql.ErrNoRows {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+			} else {
+				w.WriteHeader(http.StatusInternalServerError)
+				fmt.Fprintf(w, "The user doesn't have recorded diagnoses!")
+			}
 			return
 		}
 

@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS diagnoses (
     start_date VARCHAR(255) NULL,
     end_date VARCHAR(255) NULL,
 
-    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
 ); 
 
 CREATE TABLE IF NOT EXISTS diagnose_data (

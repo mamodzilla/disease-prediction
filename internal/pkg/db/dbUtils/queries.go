@@ -24,7 +24,7 @@ const (
 		INSERT INTO tokens (user_id, refresh_token, expiration_time)
 		VALUES ($1, $2, $3)
 		ON CONFLICT (user_id)
-		DO UPDATE 
+		DO UPDATE
 		SET refresh_token = $2, expiration_time = $3
 		WHERE tokens.user_id = $1
 	`
@@ -67,10 +67,10 @@ const (
 	`
 
 	getUserDiagnoseListQuery = `
-		SELECT user_diagnose_id, disease_name, start_date, end_date 
-		FROM diagnoses JOIN diagnose_data
-		ON diagnoses.id = diagnose_data.diagnose_id
-		WHERE user_id = $1
+		SELECT d.user_diagnose_id, dd.disease_name, d.start_date, d.end_date
+		FROM diagnoses d JOIN diagnose_data dd 
+		ON d.id = dd.diagnose_id
+		WHERE d.user_id = $1
 	`
 
 	getUserDiagnoseNumberQuery = `
@@ -78,7 +78,6 @@ const (
 		FROM diagnoses
 		WHERE user_id = $1
 		GROUP BY user_id
-		RETURNING user_diagnose_count
 	`
 
 	getUserDiagnoseData = `
@@ -92,5 +91,12 @@ const (
 		UPDATE diagnoses
 		SET end_date = $1
 		WHERE user_id = $2 AND user_diagnose_id = $3
+	`
+
+	getUserDiagnoseStartDates = `
+		SELECT d.start_date
+		FROM diagnoses d JOIN diagnose_data dd 
+		ON d.id = dd.diagnose_id
+		WHERE d.user_id = $1
 	`
 )

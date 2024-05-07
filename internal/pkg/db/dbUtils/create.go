@@ -3,6 +3,7 @@ package dbutils
 import (
 	"back-end/internal/pkg/structs"
 	"back-end/internal/utils"
+	"database/sql"
 	"time"
 )
 
@@ -47,15 +48,15 @@ func (d *DiseasePredictionDb) NoteDiagnose(userId int) (int, error) {
 	startDate := time.Now().Format("2006-01-02")
 
 	var (
-		diagnoseId     int
-		userDiagnoseId int
+		diagnoseId          int
+		numberUserDiagnoses int
 	)
-	err := d.Db.QueryRow(getUserDiagnoseNumberQuery, userId).Scan(&userDiagnoseId)
-	if err != nil {
+	err := d.Db.QueryRow(getUserDiagnoseNumberQuery, userId).Scan(&numberUserDiagnoses)
+	if err != nil && err != sql.ErrNoRows {
 		return -1, err
 	}
 
-	err = d.Db.QueryRow(noteDiagnoseQuery, userId, userDiagnoseId+1, startDate).Scan(&diagnoseId)
+	err = d.Db.QueryRow(noteDiagnoseQuery, userId, numberUserDiagnoses+1, startDate).Scan(&diagnoseId)
 	if err != nil {
 		return -1, err
 	}

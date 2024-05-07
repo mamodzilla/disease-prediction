@@ -30,11 +30,12 @@ func (a *AccountHandler) Register(w http.ResponseWriter, r *http.Request) {
 	err = a.Server.AppDb.CreateUser(data)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			fmt.Fprint(w, "The user already exists!")
+			w.WriteHeader(http.StatusBadRequest)
+			fmt.Fprint(w, "A user with such an email already exists!")
 		} else {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
 		}
+		return
 	}
 	w.WriteHeader(http.StatusCreated)
 }
