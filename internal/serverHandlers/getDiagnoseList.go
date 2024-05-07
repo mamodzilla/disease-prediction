@@ -4,7 +4,6 @@ import (
 	"back-end/internal/pkg/structs"
 	"database/sql"
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 )
@@ -26,7 +25,7 @@ func (u *UserHandler) GetDiagnoseList(w http.ResponseWriter, r *http.Request) {
 		}
 	}()
 
-	var diseaseList []structs.DiagnoseItemResponse
+	var diagnoseList []structs.DiagnoseItemResponse
 	for rows.Next() {
 		d := structs.DiagnoseItemResponse{}
 		var endDate sql.NullString
@@ -37,18 +36,17 @@ func (u *UserHandler) GetDiagnoseList(w http.ResponseWriter, r *http.Request) {
 		}
 		d.EndDate = endDate.String
 
-		diseaseList = append(diseaseList, d)
+		diagnoseList = append(diagnoseList, d)
 	}
 
-	fmt.Println(diseaseList)
-	jsonDiseaseList, err := json.Marshal(diseaseList)
+	jsonDiagnoseList, err := json.Marshal(diagnoseList)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	_, err = w.Write(jsonDiseaseList)
+	_, err = w.Write(jsonDiagnoseList)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
