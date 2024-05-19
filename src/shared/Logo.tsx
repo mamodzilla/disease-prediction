@@ -3,7 +3,7 @@ import "../app/styles/logo.css";
 
 const Logo: React.FC = () => {
     return (
-        <a className="logo" href="#">Logotype</a>
+        <a className="logo" href="home">Logotype</a>
     );
 };
 
