@@ -6,6 +6,7 @@ import Logo from '../shared/Logo';
 
 const Navbar: React.FC = () => {
     return (
+        <div className="navbar-container">
         <nav className="header__navbar">
             <div className="header__logo-container">
                 <Logo></Logo>
@@ -13,6 +14,7 @@ const Navbar: React.FC = () => {
             <SignButtons></SignButtons>
             <NavIcons></NavIcons>
         </nav>
+        </div>
     );
 };
 

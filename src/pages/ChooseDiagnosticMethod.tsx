@@ -7,9 +7,9 @@ import GoMethodBtn from "../features/GoMethodBtn";
 const ChooseDiagnosticMethod: React.FC = () => {
     return (
         <div className="page-container">
-            <div className="container">
+
                 <Navbar></Navbar>
-            </div>
+
             <main className="main">
                 <div className="choose-diagnostic-method">
                     <div className="container">

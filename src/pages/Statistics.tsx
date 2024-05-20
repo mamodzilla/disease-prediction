@@ -10,9 +10,9 @@ import AnnualIncidenceChart from "../widgets/AnnualIncidenceChart";
 const Statistics: React.FC = () => {
     return (
         <div className="page-container">
-            <div className="container">
+
                 <Navbar></Navbar>
-            </div>
+
             <main className="main">
                 <div className="statistics">
                     <div className="container">

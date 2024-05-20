@@ -13,19 +13,7 @@ const DiseaseData: React.FC = () => {
                     Vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras. 
                 </div>
             </div>
-            <div className="disease-history__disease-description-h">Your symptoms</div>
-            <div className="disease-history__symptom-listing">
-                <div className="disease-history__symptom-item">
-                    <div className="disease-history__symptom-text">Pain when moving</div>
-                    <div className="disease-history__delimiter"></div>
-                    <div className="disease-history__symptom-value">yes</div>
-                </div>
-                <div className="disease-history__symptom-item">
-                    <div className="disease-history__symptom-text">Inability to fully strai ... </div>
-                    <div className="disease-history__delimiter"></div>
-                    <div className="disease-history__symptom-value">yes</div>
-                </div>
-            </div>
+
         </div>
     );
 };

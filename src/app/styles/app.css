@@ -6,12 +6,6 @@ html {
     box-sizing: inherit;
 }
   
-body {
-    font-family: "Montserrat", sans-serif;
-    font-style: normal;
-    line-height: 1.2;
-    margin: 0;
-}
 
 .container {
     max-height: 1024px;

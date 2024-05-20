@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface IPostDiagnoseState {
+    symptom_text: string;
     disease_name: string; 
     disease_description: string;
 };
 
 const initialPostDiagnoseState: IPostDiagnoseState = {
+  symptom_text: "",
   disease_name: "",
   disease_description: ""
 };
@@ -17,21 +19,22 @@ const postDiagnoseSlice = createSlice({
         setDiagnoseResponse: (state, action: PayloadAction<IPostDiagnoseState>) => {
             state.disease_name = action.payload.disease_name;
             state.disease_description = action.payload.disease_description;
+        },
+        setSymptomText: (state, action: PayloadAction<string>) => {
+            state.symptom_text = action.payload
         }
     }
 });
 
 export const postDiagnoseReducer = postDiagnoseSlice.reducer;
-export const {setDiagnoseResponse} = postDiagnoseSlice.actions; 
+export const {setDiagnoseResponse, setSymptomText} = postDiagnoseSlice.actions; 
 
 export interface IPostDiagnose {
     symptom_text: string;
 }
 
 export const postDiagnose= async (data: IPostDiagnose) => {
-      console.log("1");
-  
-      const response = await fetch('http://26.112.223.129:8010/diagnose', 
+      const response = await fetch('http://localhost:8010/diagnose', 
       {
         method: 'POST',
         body: JSON.stringify(data),

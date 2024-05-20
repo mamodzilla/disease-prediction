@@ -6,8 +6,8 @@ import '../app/styles/header.css';
 const Header: React.FC = () => {
     return (
         <header className="header">
-            <div className="container">
-                <Navbar></Navbar>
+            <Navbar></Navbar>
+            <div className="container">               
                 <Welcome></Welcome>
             </div>
         </header>

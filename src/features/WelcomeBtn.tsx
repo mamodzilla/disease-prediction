@@ -1,7 +1,7 @@
 import React from 'react';
 import '../app/styles/welcome-btn.css';
 import { useDispatch } from 'react-redux';
-import { IPostDiagnose, IPostDiagnoseState, postDiagnose, setDiagnoseResponse } from '../store/slice';
+import { IPostDiagnose, IPostDiagnoseState, postDiagnose, setDiagnoseResponse } from '../store/slices/post/diagnose';
 import { error } from 'console';
 
 const WelcomeBtn: React.FC = () => {
@@ -14,7 +14,7 @@ const WelcomeBtn: React.FC = () => {
         console.log(pd);
     }
     return (
-        <form className="header__start-diagnosing-form" action="choose">
+        <form className="header__start-diagnosing-form" action="method">
             <button className="header__start-diagnosing-btn" onClick={WelcomeBtnHandler}>Start diagnosing</button>
         </form>
     );

@@ -8,9 +8,9 @@ import Footer from "../widgets/Footer";
 const PersonalInformation: React.FC = () => {
     return (
         <div className="page-container">
-            <div className="container">
+
                 <Navbar></Navbar>
-            </div>
+
             <main className="main">
                 <div className="personal-info">
                     <div className="container">

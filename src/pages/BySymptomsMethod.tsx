@@ -2,16 +2,21 @@ import React from "react";
 import "../app/styles/by-symptoms-method.css"; 
 import Navbar from "../widgets/Navbar";
 import Footer from "../widgets/Footer";
-import Progress from "../widgets/Progress";
-import Question from "../widgets/Question";
-import NextQuestionBtn from "../shared/NextQuestionBtn";
+import DiagnoseInputDescription from "../widgets/DiagnoseInputDescription";
+import GetResultBtn from "../shared/GetResultBtn";
+import DiagnoseInput from "../widgets/DiagnoseInput";
+import { useDispatch } from "react-redux";
+import { IPostDiagnose, IPostDiagnoseState, setDiagnoseResponse } from "../store/slices/post/diagnose";
+import { postDiagnose } from "../store/slices/post/diagnose";
+import Result from "./Result";
 
 const BySymptomsMethod: React.FC = () => {
+    
     return (
         <div className="page-container">
-            <div className="container">
+
                 <Navbar></Navbar>
-            </div>
+
             <main className="main"> 
                 <div className="by-symptoms">
                     <div className="container">
@@ -19,15 +24,19 @@ const BySymptomsMethod: React.FC = () => {
                             <h1 className="by-symptoms__h">By symptoms</h1>
                         </div>
                         <div className="by-symptoms__container">
-                            <Progress></Progress>
+                            <DiagnoseInputDescription></DiagnoseInputDescription>
                             <div className="by-symptoms__question-container">
-                                <Question></Question>
-                                <NextQuestionBtn></NextQuestionBtn>
+                                <DiagnoseInput></DiagnoseInput>
+                                <GetResultBtn></GetResultBtn>
+                                
                             </div>
                         </div> 
                     </div>
                 </div>
+                <Result></Result>
+                <br />
             </main>
+            
             <Footer></Footer>
         </div>
     );
