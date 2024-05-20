@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../widgets/Header';
 import HowToUse from '../widgets/HowToUse';
 import About from '../widgets/About';
-import UserStatistics from '../widgets/UserStatistics';
+//import UserStatistics from '../widgets/UserStatistics';
 import Footer from '../widgets/Footer';
 
 const Home: React.FC = () => {
@@ -12,7 +12,7 @@ const Home: React.FC = () => {
             <main className="main">
                 <About></About>
                 <HowToUse></HowToUse>
-                <UserStatistics></UserStatistics>
+                {/*<UserStatistics></UserStatistics>*/}
             </main>
             <Footer></Footer>
         </div>
