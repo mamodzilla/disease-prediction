@@ -8,7 +8,7 @@ const ChooseDiagnosticMethod: React.FC = () => {
     return (
         <div className="page-container">
 
-                <Navbar></Navbar>
+            <Navbar></Navbar>
 
             <main className="main">
                 <div className="choose-diagnostic-method">

@@ -4,10 +4,7 @@ import Navbar from "../widgets/Navbar";
 import Footer from "../widgets/Footer";
 import DiagnoseInputDescription from "../widgets/DiagnoseInputDescription";
 import GetResultBtn from "../shared/GetResultBtn";
-import DiagnoseInput from "../widgets/DiagnoseInput";
-import { useDispatch } from "react-redux";
-import { IPostDiagnose, IPostDiagnoseState, setDiagnoseResponse } from "../store/slices/post/diagnose";
-import { postDiagnose } from "../store/slices/post/diagnose";
+import DiagnoseInput from "../widgets/DiagnoseInput"
 import Result from "./Result";
 
 const BySymptomsMethod: React.FC = () => {
@@ -15,7 +12,7 @@ const BySymptomsMethod: React.FC = () => {
     return (
         <div className="page-container">
 
-                <Navbar></Navbar>
+            <Navbar></Navbar>
 
             <main className="main"> 
                 <div className="by-symptoms">
