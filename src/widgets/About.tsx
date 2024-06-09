@@ -3,6 +3,7 @@ import '../app/styles/about.css';
 import Contacts from '../shared/Contacts';
 
 const About: React.FC = () => {
+    
     return (
         <section className="about">
             <div className="container">

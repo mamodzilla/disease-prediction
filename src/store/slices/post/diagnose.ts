@@ -1,15 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export interface IPostDiagnoseState {
-    symptom_text: string;
+export interface ISingleDiagnose {
     disease_name: string; 
     disease_description: string;
+}
+
+export interface IPostDiagnoseState {
+    symptom_text: string;
+    diseases: ISingleDiagnose[];   
 };
 
 const initialPostDiagnoseState: IPostDiagnoseState = {
   symptom_text: "",
-  disease_name: "",
-  disease_description: ""
+  diseases: []
 };
 
 const postDiagnoseSlice = createSlice({
@@ -17,8 +20,7 @@ const postDiagnoseSlice = createSlice({
     initialState: initialPostDiagnoseState,
     reducers: {
         setDiagnoseResponse: (state, action: PayloadAction<IPostDiagnoseState>) => {
-            state.disease_name = action.payload.disease_name;
-            state.disease_description = action.payload.disease_description;
+            state.diseases = action.payload.diseases;
         },
         setSymptomText: (state, action: PayloadAction<string>) => {
             state.symptom_text = action.payload

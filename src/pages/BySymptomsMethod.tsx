@@ -5,15 +5,11 @@ import Footer from "../widgets/Footer";
 import DiagnoseInputDescription from "../widgets/DiagnoseInputDescription";
 import GetResultBtn from "../shared/GetResultBtn";
 import DiagnoseInput from "../widgets/DiagnoseInput"
-import Result from "./Result";
 
-const BySymptomsMethod: React.FC = () => {
-    
+const BySymptomsMethod: React.FC = () => { 
     return (
         <div className="page-container">
-
             <Navbar></Navbar>
-
             <main className="main"> 
                 <div className="by-symptoms">
                     <div className="container">
@@ -24,16 +20,12 @@ const BySymptomsMethod: React.FC = () => {
                             <DiagnoseInputDescription></DiagnoseInputDescription>
                             <div className="by-symptoms__question-container">
                                 <DiagnoseInput></DiagnoseInput>
-                                <GetResultBtn></GetResultBtn>
-                                
+                                <GetResultBtn></GetResultBtn>                              
                             </div>
                         </div> 
                     </div>
                 </div>
-                <Result></Result>
-                <br />
-            </main>
-            
+            </main>            
             <Footer></Footer>
         </div>
     );

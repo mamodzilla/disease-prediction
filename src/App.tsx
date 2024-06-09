@@ -11,6 +11,7 @@ import Statistics from "./pages/Statistics";
 import ChooseDiagnosticMethod from "./pages/ChooseDiagnosticMethod";
 import BySymptomsMethod from "./pages/BySymptomsMethod";
 import PrivateRoute from "./features/PrivateRoute";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -26,8 +27,8 @@ function App() {
           <Route path="login" element={<SignIn></SignIn>}/>
           <Route path="register" element={<SignUp></SignUp>}/>
           <Route path="result" element={<Result></Result>}></Route>
-          <Route path="choose" element={<ChooseDiagnosticMethod></ChooseDiagnosticMethod>}></Route>
           <Route path="method" element={<BySymptomsMethod></BySymptomsMethod>}></Route>
+          <Route path="*" element={<NotFound></NotFound>}></Route>
         </Routes>
     </div>
   );

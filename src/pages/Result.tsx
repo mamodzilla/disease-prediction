@@ -1,28 +1,34 @@
 import React from "react";
 import "../app/styles/result.css";
 import Navbar from "../widgets/Navbar";
-import Footer from "../widgets/Footer";
 import GoHomeBtn from "../features/GoHomeBtn";
+import Footer from "../widgets/Footer";
 import DiagnoseListing from "../widgets/DiagnoseListing";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
-import { IPostDiagnoseState } from "../store/slices/post/diagnose";
 
 const Result: React.FC = () => {
-    const result: IPostDiagnoseState = useSelector((state: RootState) => state.diagnose);
+    
     return (
-        <div className="by-symptoms__progress-container">
-            <div className="by-symptoms__progress-header result__disease">
-                <h4>Diagnose</h4>
-                <div className="result__disease">
-                    {result.disease_name}
-                </div>
-                <h4>Description</h4>
-                <div className="result__disease">
-                    {result.disease_description}
+        <div className="page-container">
+            <Navbar></Navbar>
+        <main className="main">
+            <div className="result">
+                <div className="container">
+                    <div className="result__h-container">
+                        <h1 className="result__h">Result</h1>
+                    </div>
+                    <div className="result__container">
+                        <div className="result__header">
+                            <div className="result__header-diagnoses">Diagnoses</div>
+                            <div className="result__header-probability">Description</div>
+                        </div>
+                        <DiagnoseListing></DiagnoseListing>
+                        <GoHomeBtn></GoHomeBtn>
+                    </div>
                 </div>
             </div>
-        </div>
+        </main>
+        <Footer></Footer>
+    </div>
     );
 };
 

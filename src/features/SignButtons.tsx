@@ -1,15 +1,12 @@
 import React from 'react';
 import "../app/styles/sign-buttons.css"
+import { Link } from 'react-router-dom';
 
 const SignButtons: React.FC = () => {
     return (
         <div className="header__sign-buttons">
-            <form className="header__sign-in-form" action="/login">
-                <button className="header__sign-btn">Sign in</button>
-            </form>
-            <form className="header__sign-up-form" action="/register">
-                <button className="header__sign-btn">Sign up</button>
-            </form>
+            <Link to="/login"><button className="header__sign-btn">Sign in</button></Link>
+            <Link to="/register"><button className="header__sign-btn">Sign up</button></Link>                   
         </div>
     );
 };

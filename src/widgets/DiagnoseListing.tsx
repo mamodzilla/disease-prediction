@@ -1,26 +1,25 @@
 import React from "react";
 import "../app/styles/diagnose-listing.css"; 
-import DiseaseMoreArrow from "../shared/DiseaseMoreArrow";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import { IPostDiagnoseState } from "../store/slices/post/diagnose";
 
 const DiagnoseListing: React.FC = () => {
+    const result: IPostDiagnoseState = useSelector((state: RootState) => state.diagnose);
     return (
         <div className="result__diagnose-listing">
-            <div className="result__diagnose-container">
-                <div className="result__disease-name">Broken finger</div>
-                <div className="result__delimiter"></div>
-                <div className="result__disease-probability-container"><span className="result__disease-probability">95%</span></div>
-                <div className="result__disease-arrow-container">
-                    <DiseaseMoreArrow></DiseaseMoreArrow>
+            {result.diseases.map(function(disease){
+                return <div className="result__diagnose-container">
+                    <div className="result__disease-name">{disease.disease_name}</div>
+                    <div className="result__delimiter"></div>
+                    <div className="result__disease-probability-container">
+                        <span className="result__disease-probability">
+                            {disease.disease_description}
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div className="result__diagnose-container">
-                <div className="result__disease-name">Finger bruise</div>
-                <div className="result__delimiter"></div>
-                <div className="result__disease-probability-container"><span className="result__disease-probability">23%</span></div>
-                <div className="result__disease-arrow-container">
-                    <DiseaseMoreArrow></DiseaseMoreArrow>
-                </div>
-            </div>
+            }
+            )}
         </div>
     );
 };
