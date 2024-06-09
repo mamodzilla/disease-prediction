@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useRef } from "react";
 import "../app/styles/question.css";
 import { useDispatch } from "react-redux";
-import { IPostDiagnose, IPostDiagnoseState, postDiagnose, setDiagnoseResponse, setSymptomText } from "../store/slices/post/diagnose";
+import { setSymptomText } from "../store/slices/post/diagnose";
 
 const DiagnoseInput: React.FC = () => {
     const dispatch = useDispatch(); 

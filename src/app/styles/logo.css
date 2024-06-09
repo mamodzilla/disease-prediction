@@ -3,4 +3,11 @@
     font-weight: 700;
     color: #000;
 }
-  
+
+.logo:hover {
+    color: #57C964;
+}
+
+.logo:active {
+    color: #00AF11;
+}

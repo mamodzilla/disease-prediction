@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { postDiagnoseReducer } from "./slices/post/diagnose";
+import { postLoginReducer } from "./slices/post/login";
 
 const store = configureStore({
     reducer: {
-        diagnose: postDiagnoseReducer
+        diagnose: postDiagnoseReducer,
+        login: postLoginReducer
     }
 }) 
 
