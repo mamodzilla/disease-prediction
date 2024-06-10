@@ -49,23 +49,3 @@ export const postDiagnose= async (data: IPostDiagnose) => {
       const resp: Promise<any> = await response.json();
       return resp;
 };
-
-export const usePostDiagnoseGetResult = () => {
-    const dispatch = useDispatch(); 
-    const symptoms = useSelector((state: RootState)=>state.diagnose.symptom_text);
-    const getResult = () => {
-        const request: IPostDiagnose = {
-            symptom_text: symptoms
-        };
-        type MyInterfaceType = Awaited<ReturnType<typeof postDiagnose>>;     
-        const exctract = (data: MyInterfaceType) => {
-            const output: IPostDiagnoseState = {
-                symptom_text: symptoms,
-                diseases: data
-            }
-            dispatch(setDiagnoseResponse(output));
-        };       
-        postDiagnose(request).then(data => exctract(data));
-    };
-    getResult();  
-}
