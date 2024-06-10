@@ -5,7 +5,8 @@ import InputSign from "../shared/InputSign";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import { IPostLoginState, postLoginGetResult, setUserData} from "../store/slices/post/login";
+import { IPostLoginState, usePostLoginGetResult, setUserData} from "../store/slices/post/login";
+import { Navigate } from "react-router-dom";
 
 const SignInForm: React.FC = () => {
     const dispatch = useDispatch();
@@ -14,23 +15,22 @@ const SignInForm: React.FC = () => {
         formState: {
             errors, isValid
         },
-        reset,
         handleSubmit,
     } = useForm(
         {
             mode: "onBlur"
         }
     );
-    const onSubmit = (data: any) => {
+    const useOnSubmit = (data: any) => {
         dispatch(setUserData(data));
-        postLoginGetResult();
+        usePostLoginGetResult();
         const result: IPostLoginState = useSelector((state: RootState) => state.login);
         localStorage.setItem('access_token', result.access_token);
         document.cookie = `refresh_token=${result.refresh_token}`;
-        reset();  
+        <Navigate to="personal-info"></Navigate>
     } 
     return (
-        <form className="sign-in__form" method="post" onSubmit={handleSubmit(onSubmit)}>
+        <form className="sign-in__form" method="post" onSubmit={handleSubmit(useOnSubmit)}>
             <div className="sign-in__input-listing">
                 <div className="sign-in__item">
                     <div className="sign-in__item-text">Email:</div>
@@ -39,7 +39,7 @@ const SignInForm: React.FC = () => {
                             required: "E-mail is required!",
                             pattern: {
                                 value: /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i,
-                                message: "Wrong format for e-mail!"
+                                message: "Wrong format of e-mail!"
                             }
                         })} className="sign-in__item-input" name="email" type="email"/>                        
                     </div>

@@ -1,32 +1,76 @@
 import React from "react";
 import "../app/styles/sign-up-form.css"; 
+import "../app/styles/sign-up-btn.css";
 import InputSign from "../shared/InputSign";
-import SignUpBtn from "../features/SignUpBtn";
+//import SignUpBtn from "../features/SignUpBtn";
+import { useForm } from "react-hook-form";
+import { setRegisterData, usePostRegisterGetResult } from "../store/slices/post/register";
+import { useDispatch } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 const SignUpForm: React.FC = () => {
+    const dispatch = useDispatch();
+    const {
+        register,
+        formState: {
+            errors, isValid
+        },
+        handleSubmit,
+    } = useForm(
+        {
+            mode: "onSubmit"
+        }
+    );
+    const useOnSubmit = (data: any) => {
+        dispatch(setRegisterData(data));
+        if (usePostRegisterGetResult()) {
+            <Navigate to="/login"></Navigate>
+        };
+    } 
     return (
-        <form className="sign-up__form" method="post">
+        <form className="sign-up__form" method="post" onSubmit={handleSubmit(useOnSubmit)}>
             <div className="sign-up__input-listing">
                 <div className="sign-up__item">
                     <div className="sign-up__item-text">Nickname:</div>
                     <div className="sign-up__item-input-container">
-                        <input className="sign-up__item-input" name="nickname" type="text" required/>
+                        <input className="sign-up__item-input" name="nickname" type="text" 
+                        required/>
                         <div className="sign-up__item-input-sign-container"></div>
                     </div>
                 </div>
                 <div className="sign-up__item">
                     <div className="sign-up__item-text">Email:</div>
                     <div className="sign-up__item-input-container">
-                        <input className="sign-up__item-input" name="email" type="email" required/>
+                        <input {...register('email', {
+                            required: "E-mail is required!",
+                            pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i,
+                                message: "Wrong format of e-mail!"
+                            }
+                        })}                        
+                        className="sign-up__item-input" name="email" type="email" required/>
                         <div className="sign-up__item-input-sign-container"></div>
                     </div>
+                    <div className="sign-in__item">
+                            {errors?.email && <p>{errors?.email?.message?.toString() || "Error!"}</p>}
+                        </div>
                 </div>
                 <div className="sign-up__item">
                     <div className="sign-up__item-text">Password:</div>
                     <div className="sign-up__item-input-container">
-                        <input className="sign-up__item-input" name="password" type="password" required/>
+                        <input {...register('password', {
+                            required: "Password is required!",
+                            minLength: {
+                                value: 5,
+                                message: "Password require more than 5 symbols."
+                            }
+                        })} 
+                        className="sign-up__item-input" name="password" type="password" required/>
                         <div className="sign-up__item-input-sign-container"><InputSign></InputSign></div>
                     </div>
+                    <div className="sign-in__item">
+                            {errors?.password && <p>{errors?.password?.message?.toString() || "Error!"}</p>}
+                        </div>
                 </div>
                 <div className="sign-up__item">
                     <div className="sign-up__item-text">Password again:</div>
@@ -37,7 +81,7 @@ const SignUpForm: React.FC = () => {
                 </div>
             </div>
             <div className="sign-up__btn-container">
-                <SignUpBtn></SignUpBtn>
+                <button className="sign-up__btn" type="submit" disabled={!isValid}>Create account</button>
             </div>
         </form>
     ); 

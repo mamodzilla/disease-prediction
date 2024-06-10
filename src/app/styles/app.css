@@ -41,7 +41,6 @@ button {
 button:hover {
     background-color:  #45aa4f;
     text-shadow: 0 0 10px rgba(196, 255, 204, 0.9);
-    border: 1px solid rgba(196, 255, 204, 0.9);
     color: #FFF;
 }
 
@@ -49,6 +48,8 @@ button:active {
     background-color: #00af11cc;
     color: #555;
 }
+
+
 
 .h-container {
     margin-top: 200px;

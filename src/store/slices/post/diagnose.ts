@@ -50,7 +50,7 @@ export const postDiagnose= async (data: IPostDiagnose) => {
       return resp;
 };
 
-export const postDiagnoseGetResult = () => {
+export const usePostDiagnoseGetResult = () => {
     const dispatch = useDispatch(); 
     const symptoms = useSelector((state: RootState)=>state.diagnose.symptom_text);
     const getResult = () => {
@@ -58,25 +58,14 @@ export const postDiagnoseGetResult = () => {
             symptom_text: symptoms
         };
         type MyInterfaceType = Awaited<ReturnType<typeof postDiagnose>>;     
-        const exampleFunction = (data: MyInterfaceType) => {
+        const exctract = (data: MyInterfaceType) => {
             const output: IPostDiagnoseState = {
                 symptom_text: symptoms,
                 diseases: data
             }
             dispatch(setDiagnoseResponse(output));
         };       
-        postDiagnose(request).then(data => exampleFunction(data));
+        postDiagnose(request).then(data => exctract(data));
     };
     getResult();  
 }
-
-/*diagnose (post)
-req: 
-{
-    "symptom_text": ""
-}
-resp (200): 
-{
-    "disease_name": "",
-    "disease_description": ""
-}*/
