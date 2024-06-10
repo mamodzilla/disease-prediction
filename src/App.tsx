@@ -8,7 +8,6 @@ import Result from "./pages/Result";
 import DiseaseHistory from "./pages/DiseaseHistory";
 import PersonalInformation from "./pages/PersonalInformation";
 import Statistics from "./pages/Statistics";
-import ChooseDiagnosticMethod from "./pages/ChooseDiagnosticMethod";
 import BySymptomsMethod from "./pages/BySymptomsMethod";
 import PrivateRoute from "./features/PrivateRoute";
 import NotFound from "./pages/NotFound";
