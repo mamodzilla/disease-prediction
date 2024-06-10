@@ -5,31 +5,30 @@ import { IPostRefresh, IPostRefreshState, setRefreshToken, usePostRefreshGetResu
 import { RootState } from "../store/store";
 
 const PrivateRoute = () => {
-    const auth = () => {
+    const useAuth = () => {
         const dispatch = useDispatch();
         let isAuthorized = false;
-        const accessToken = localStorage.getItem('access_token');
-        if (accessToken !== null) {
+        const refreshToken = () => {
             const cookies = document.cookie.split(";");
             for (let cookie of cookies) {
                 const parts = cookie.split("=");
                 if (parts[0] == "refresh_token")
                     {
-                        dispatch(setRefreshToken(parts[1]));
-                        usePostRefreshGetResult();
-                        const result: IPostRefreshState = useSelector((state: RootState) => state.login);
-                        localStorage.setItem("access_token", result.access_token);
-                        document.cookie = `refresh_token=${result.refresh_token}`
-                        isAuthorized = true;
-                    }
-            }
-            
-        }
+                        return parts[1]
+                    }};
+            return ""
+        };
+        dispatch(setRefreshToken(refreshToken()));
+        usePostRefreshGetResult();
+        const result: IPostRefreshState = useSelector((state: RootState) => state.refresh);
+        localStorage.setItem("access_token", result.access_token);
+        document.cookie = `refresh_token=${result.refresh_token}`
+        isAuthorized = true;
         return isAuthorized;
     }
     //const auth = true;
     return (
-        auth() ? <Outlet/> : <Navigate to="login"></Navigate>
+        useAuth() ? <Outlet/> : <Navigate to="login"></Navigate>
     );
 };
 
