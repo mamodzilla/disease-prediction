@@ -45,8 +45,7 @@ export const postRegister= async (data: IPostRegister) => {
         'Content-Type': 'application/json',
       },
     });
-    const resp: Promise<any> = await response.json();
-    return resp;
+    return response;
 };
 
 

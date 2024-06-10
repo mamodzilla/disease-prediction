@@ -5,6 +5,7 @@ import { RootState } from "../../store";
 export interface ISingleDiagnose {
     disease_name: string; 
     disease_description: string;
+    descriptionIsOpen: boolean;
 }
 
 export interface IPostDiagnoseState {
@@ -26,12 +27,19 @@ const postDiagnoseSlice = createSlice({
         },
         setSymptomText: (state, action: PayloadAction<string>) => {
             state.symptom_text = action.payload
+        },
+        setDescriptionOpeningStatus: (state, action: PayloadAction<number>) => {
+            if (state.diseases[action.payload].descriptionIsOpen) {
+                state.diseases[action.payload].descriptionIsOpen = false;
+            } else {
+                state.diseases[action.payload].descriptionIsOpen = true;
+            }
         }
     }
 });
 
 export const postDiagnoseReducer = postDiagnoseSlice.reducer;
-export const {setDiagnoseResponse, setSymptomText} = postDiagnoseSlice.actions; 
+export const {setDiagnoseResponse, setSymptomText, setDescriptionOpeningStatus} = postDiagnoseSlice.actions; 
 
 export interface IPostDiagnose {
     symptom_text: string;

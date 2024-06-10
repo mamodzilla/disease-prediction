@@ -10,25 +10,25 @@ const Result: React.FC = () => {
     return (
         <div className="page-container">
             <Navbar></Navbar>
-        <main className="main">
-            <div className="result">
-                <div className="container">
-                    <div className="result__h-container">
-                        <h1 className="result__h">Result</h1>
-                    </div>
-                    <div className="result__container">
-                        <div className="result__header">
-                            <div className="result__header-diagnoses">Diagnoses</div>
-                            <div className="result__header-probability">Description</div>
+            <main className="main">
+                <div className="result">
+                    <div className="container">
+                        <div className="result__h-container">
+                            <h1 className="result__h">Result</h1>
                         </div>
-                        <DiagnoseListing></DiagnoseListing>
-                        <GoHomeBtn></GoHomeBtn>
+                        <div className="result__container">
+                            <div className="result__header">
+                                <div className="result__header-diagnoses">Diagnoses</div>
+                                <div className="result__header-probability">Description</div>
+                            </div>
+                            <DiagnoseListing></DiagnoseListing>
+                            <GoHomeBtn></GoHomeBtn>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </main>
-        <Footer></Footer>
-    </div>
+            </main>
+            <Footer></Footer>
+        </div>
     );
 };
 

@@ -13,24 +13,31 @@
 .result__disease-name {
     font-size: 28px;
     font-weight: 700;
-    width: 685px;
+    margin-right: 20px;
+    width: 400px;
 }
   
 .result__delimiter {
-    width: 5px;
-    height: 64px;
+    width: 4px;
+    height: 80px;
     background-color: #BAB9B9;
     margin-right: 20px;
 }
   
-.result__disease-probability-container {
-    margin-right: 190px;
+.result__disease-description-container {
+    margin-right: 40px;
+    width: 400px;
+}
+
+.result__open-disease-description-container {
+    margin-right: 40px;
+    padding: 0px 20px;
 }
   
-.result__disease-probability {
-    color: #EE0101;
+.result__disease-description {
+    color: black;
     font-size: 28px;
-    font-weight: 700;
+    font-weight: 500;
 }
   
 .result__disease-arrow-container {
@@ -38,4 +45,18 @@
     align-items: center;
     justify-content: center;
 }
-  
+
+.result__btn-arrow {
+    width: 32px;
+    height: 32px;
+    transform: rotate(180deg);
+    fill: black;
+}
+
+.result__btn-arrow--open {
+    transform: rotate(-90deg);
+}
+
+.result__btn-arrow:hover {
+    cursor: pointer;
+}

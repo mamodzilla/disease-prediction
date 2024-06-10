@@ -6,11 +6,12 @@ import InputSign from "../shared/InputSign";
 import { useForm } from "react-hook-form";
 import { IPostRegister, postRegister, setRegisterData} from "../store/slices/post/register";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { RootState } from "../store/store";
 
 const SignUpForm: React.FC = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const {
         register,
         formState: {
@@ -22,32 +23,31 @@ const SignUpForm: React.FC = () => {
             mode: "onSubmit"
         }
     );
+
     const useOnSubmit = (data: any) => {
         dispatch(setRegisterData(data));
-        const nickname = useSelector((state:RootState)=>state.register.nickname)
-        const email = useSelector((state: RootState)=>state.register.email);
-        const password = useSelector((state: RootState)=>state.register.password);
-        let isOK = false;
         const getResult = () => {      
             const request: IPostRegister = {
-                nickname: nickname,
-                email: email,
-                password: password
+                nickname: data.nickname,
+                email: data.email,
+                password: data.password
             };
-            postRegister(request).then((response) => {if (response.ok) {isOK = true}});
+            postRegister(request);
         }
         getResult();
-        if (!isOK) {
-            <Navigate to="/login"></Navigate>
-        };
+        navigate("/login");
     } 
+
     return (
         <form className="sign-up__form" method="post" onSubmit={handleSubmit(useOnSubmit)}>
             <div className="sign-up__input-listing">
                 <div className="sign-up__item">
                     <div className="sign-up__item-text">Nickname:</div>
                     <div className="sign-up__item-input-container">
-                        <input className="sign-up__item-input" name="nickname" type="text" 
+                        <input {...register('nickname', {
+                            required: "Nickname is required!"
+                        })}     
+                        className="sign-up__item-input" name="nickname" type="text" 
                         required/>
                         <div className="sign-up__item-input-sign-container"></div>
                     </div>
