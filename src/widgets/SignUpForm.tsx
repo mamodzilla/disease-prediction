@@ -4,9 +4,10 @@ import "../app/styles/sign-up-btn.css";
 import InputSign from "../shared/InputSign";
 //import SignUpBtn from "../features/SignUpBtn";
 import { useForm } from "react-hook-form";
-import { setRegisterData, usePostRegisterGetResult } from "../store/slices/post/register";
-import { useDispatch } from "react-redux";
+import { IPostRegister, postRegister, setRegisterData} from "../store/slices/post/register";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import { RootState } from "../store/store";
 
 const SignUpForm: React.FC = () => {
     const dispatch = useDispatch();
@@ -23,7 +24,20 @@ const SignUpForm: React.FC = () => {
     );
     const useOnSubmit = (data: any) => {
         dispatch(setRegisterData(data));
-        if (usePostRegisterGetResult()) {
+        const nickname = useSelector((state:RootState)=>state.register.nickname)
+        const email = useSelector((state: RootState)=>state.register.email);
+        const password = useSelector((state: RootState)=>state.register.password);
+        let isOK = false;
+        const getResult = () => {      
+            const request: IPostRegister = {
+                nickname: nickname,
+                email: email,
+                password: password
+            };
+            postRegister(request).then((response) => {if (response.ok) {isOK = true}});
+        }
+        getResult();
+        if (!isOK) {
             <Navigate to="/login"></Navigate>
         };
     } 

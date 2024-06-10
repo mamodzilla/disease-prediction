@@ -49,19 +49,4 @@ export const postRegister= async (data: IPostRegister) => {
     return resp;
 };
 
-export const usePostRegisterGetResult = () => {
-    const nickname = useSelector((state:RootState)=>state.register.nickname)
-    const email = useSelector((state: RootState)=>state.register.email);
-    const password = useSelector((state: RootState)=>state.register.password);
-    let isOK = false;
-    const getResult = () => {      
-        const request: IPostRegister = {
-            nickname: nickname,
-            email: email,
-            password: password
-        };
-        postRegister(request).then((response) => {if (response.ok) {isOK = true}});
-    }
-    getResult();
-    return isOK
-}
+

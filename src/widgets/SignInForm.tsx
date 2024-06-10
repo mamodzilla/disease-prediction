@@ -5,11 +5,10 @@ import InputSign from "../shared/InputSign";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import { IPostLoginState, usePostLoginGetResult, setUserData} from "../store/slices/post/login";
+import { IPostLoginState, setUserData, IPostLogin, postLogin, setTokens} from "../store/slices/post/login";
 import { Navigate } from "react-router-dom";
 
-const SignInForm: React.FC = () => {
-    const dispatch = useDispatch();
+const SignInForm: React.FC = () => {   
     const {
         register,
         formState: {
@@ -22,8 +21,28 @@ const SignInForm: React.FC = () => {
         }
     );
     const useOnSubmit = (data: any) => {
+        const dispatch = useDispatch();
         dispatch(setUserData(data));
-        usePostLoginGetResult();
+        const email = useSelector((state: RootState)=>state.login.email);
+        const password = useSelector((state: RootState)=>state.login.password);
+        const getResult = () => {
+        const request: IPostLogin = {
+            email: email,
+            password: password
+        };
+        type MyInterfaceType = Awaited<ReturnType<typeof postLogin>>;     
+        const exctract = (data: MyInterfaceType) => {
+            const output: IPostLoginState = {
+                email: email,
+                password: password,
+                access_token: data.access_token,
+                refresh_token: data.refresh_token
+            }
+            dispatch(setTokens(output));
+            }
+            postLogin(request).then(data => exctract(data));
+        }
+        getResult();
         const result: IPostLoginState = useSelector((state: RootState) => state.login);
         localStorage.setItem('access_token', result.access_token);
         document.cookie = `refresh_token=${result.refresh_token}`;
