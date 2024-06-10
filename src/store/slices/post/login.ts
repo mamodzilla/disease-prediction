@@ -52,27 +52,4 @@ export const postLogin= async (data: IPostLogin) => {
     return resp;
 };
 
-export const usePostLoginGetResult = () => {
-    const dispatch = useDispatch(); 
-    const email = useSelector((state: RootState)=>state.login.email);
-    const password = useSelector((state: RootState)=>state.login.password);
-    const getResult = () => {
-        const request: IPostLogin = {
-            email: email,
-            password: password
-        };
-        type MyInterfaceType = Awaited<ReturnType<typeof postLogin>>;     
-        const exctract = (data: MyInterfaceType) => {
-            const output: IPostLoginState = {
-                email: email,
-                password: password,
-                access_token: data.access_token,
-                refresh_token: data.refresh_token
-            }
-            dispatch(setTokens(output));
-        }
-        postLogin(request).then(data => exctract(data));
-    }
-    getResult();
-}
 

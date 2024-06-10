@@ -3,12 +3,31 @@ import "../app/styles/personal-information-form.css";
 import InputSign from "../shared/InputSign";
 import SavePersonalInformationBtn from "../features/SavePersonalInformationBtn";
 import { RootState } from "../store/store";
-import { useSelector } from "react-redux";
-import { IGetUserProfileState, useGetUserProfileGetResult } from "../store/slices/get/user/profile";
+import { useDispatch, useSelector } from "react-redux";
+import { IGetUserProfileState, getUserProfile, setUserInfo, useGetUserProfileGetResult } from "../store/slices/get/user/profile";
 
 const PersonalInformationForm: React.FC = () => {
     const accessToken = localStorage.getItem('access_token');
-    useGetUserProfileGetResult(accessToken?.toString());
+    const dispatch = useDispatch(); 
+    const getResult = () => {
+        type MyInterfaceType = Awaited<ReturnType<typeof getUserProfile>>;     
+        const exampleFunction = (data: MyInterfaceType) => {
+            const output: IGetUserProfileState = {
+                nickname : data.nickname,
+                email : data.email,
+                password : data.password,
+                birth_date : data.birth_date,
+                gender : data.gender,
+                marital_status : data.marital_status,
+                having_children : data.having_children,
+                job : data.job,
+                location : data.location,
+            }
+            dispatch(setUserInfo(output));
+        }
+        getUserProfile(accessToken?.toString()).then(data => exampleFunction(data));
+    }
+    getResult();
     const result: IGetUserProfileState = useSelector((state: RootState) => state.user_profile);
     return (
         <form className="personal-info__form" method="post">
