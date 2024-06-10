@@ -1,4 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 export interface IPostLoginState {
     email: string;
@@ -49,3 +51,28 @@ export const postLogin= async (data: IPostLogin) => {
     const resp: Promise<any> = await response.json();
     return resp;
 };
+
+export const postLoginGetResult = () => {
+    const dispatch = useDispatch(); 
+    const email = useSelector((state: RootState)=>state.login.email);
+    const password = useSelector((state: RootState)=>state.login.password);
+    const getResult = () => {
+        const request: IPostLogin = {
+            email: email,
+            password: password
+        };
+        type MyInterfaceType = Awaited<ReturnType<typeof postLogin>>;     
+        const exampleFunction = (data: MyInterfaceType) => {
+            const output: IPostLoginState = {
+                email: email,
+                password: password,
+                access_token: data.access_token,
+                refresh_token: data.refresh_token
+            }
+            dispatch(setTokens(output));
+        }
+        postLogin(request).then(data => exampleFunction(data));
+    }
+    getResult();
+}
+
