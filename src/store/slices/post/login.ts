@@ -6,14 +6,16 @@ export interface IPostLoginState {
     email: string;
     password: string;
     access_token: string;
-    refresh_token: string
+    refresh_token: string;
+    isAuth: boolean;
 }
 
 const initialPostLoginState: IPostLoginState = {
     email: "",
     password: "",
     access_token: "",
-    refresh_token: ""
+    refresh_token: "",
+    isAuth: false
 }
 
 const postLoginSlice = createSlice({
@@ -27,12 +29,15 @@ const postLoginSlice = createSlice({
             setTokens : (state, action: PayloadAction<IPostLoginState>) => {
                 state.access_token = action.payload.access_token;
                 state.refresh_token = action.payload.refresh_token;
+            },
+            setAuth: (state, action: PayloadAction<boolean>) => {
+                state.isAuth = action.payload;
             }
         }
 });
 
 export const postLoginReducer = postLoginSlice.reducer;
-export const {setUserData, setTokens} = postLoginSlice.actions; 
+export const {setUserData, setTokens, setAuth} = postLoginSlice.actions; 
 
 export interface IPostLogin {
     email: string;

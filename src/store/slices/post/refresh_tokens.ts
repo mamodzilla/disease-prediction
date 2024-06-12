@@ -46,22 +46,24 @@ export const postRefresh = async (data: IPostRefresh) => {
     return resp;
 };
 
-export const usePostRefreshGetResult = () => {
-    const dispatch = useDispatch(); 
+export const usePostRefreshGetResult = async () => {
     const refresh_token = useSelector((state: RootState)=>state.refresh.refresh_token);
-    const getResult = () => {
+    const getResult = async () => {
         const request: IPostRefresh = {
             refresh_token: refresh_token,
         };
         type MyInterfaceType = Awaited<ReturnType<typeof postRefresh>>;     
-        const exampleFunction = (data: MyInterfaceType) => {
+        const extract = (data: MyInterfaceType) => {
             const output: IPostRefreshState = {
                 access_token: data.access_token,
                 refresh_token: data.refresh_token
             }
-            dispatch(setTokens(output));
+            localStorage.setItem("access_token", output.access_token);
+            document.cookie = `refresh_token=${output.refresh_token}`;
         }
-        postRefresh(request).then(data => exampleFunction(data));
+        await postRefresh(request).then(data => extract(data));
     }
-    getResult();
+    await getResult();
+    const isAuthorized = true;
+    return isAuthorized;
 }

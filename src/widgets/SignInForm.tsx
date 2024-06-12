@@ -31,24 +31,24 @@ const SignInForm: React.FC = () => {
             password: data.password
         };
         type MyInterfaceType = Awaited<ReturnType<typeof postLogin>>;     
-        const exctract = (data: MyInterfaceType) => {
-            const output: IPostLoginState = {
-                email: data.email,
-                password: data.password,
-                access_token: data.access_token,
-                refresh_token: data.refresh_token
-            }
-            dispatch(setTokens(output));
+        const extract = (data: MyInterfaceType) => {
+                const output: IPostLoginState = {
+                    email: data.email,
+                    password: data.password,
+                    access_token: data.access_token,
+                    refresh_token: data.refresh_token,
+                    isAuth: false
+                }
+                dispatch(setTokens(output));
             }
             postLogin(request).then(response => {
-                exctract(response);
+                extract(response);
                 isOK = true;
                 localStorage.setItem('access_token', response.access_token);
                 document.cookie = `refresh_token=${response.refresh_token}`;
-                console.log(response);
-                // if (isOK) {
-                //     navigate("/personal-info");
-                // }
+                if (isOK) {
+                    navigate("/personal-info");
+                }
             });
         }
         getResult();

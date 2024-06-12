@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
         <Routes>
-          <Route element={<PrivateRoute/>}>
+          <Route loader={PrivateRoute}>
             <Route path="personal-info" element={<PersonalInformation></PersonalInformation>}></Route>
             <Route path="stats" element={<Statistics></Statistics>}></Route>
             <Route path="history" element={<DiseaseHistory></DiseaseHistory>}></Route>

@@ -11,7 +11,7 @@ const PersonalInformationForm: React.FC = () => {
     const dispatch = useDispatch(); 
     const getResult = () => {
         type MyInterfaceType = Awaited<ReturnType<typeof getUserProfile>>;     
-        const exampleFunction = (data: MyInterfaceType) => {
+        const extract = (data: MyInterfaceType) => {
             const output: IGetUserProfileState = {
                 nickname : data.nickname,
                 email : data.email,
@@ -25,7 +25,7 @@ const PersonalInformationForm: React.FC = () => {
             }
             dispatch(setUserInfo(output));
         }
-        getUserProfile(accessToken?.toString()).then(data => exampleFunction(data));
+        getUserProfile(accessToken?.toString()).then(data => extract(data));
     }
     getResult();
     const result: IGetUserProfileState = useSelector((state: RootState) => state.user_profile);
